@@ -4,86 +4,46 @@ import { useState, useEffect } from "react";
 
 // Pre-computed static values to avoid Math.random() in render
 const STARS = [
-  { id: 0, left: 5.2, top: 12.4, delay: 0.3, size: 1.8, opacity: 0.7 },
-  { id: 1, left: 15.7, top: 34.1, delay: 1.2, size: 1.2, opacity: 0.5 },
-  { id: 2, left: 25.3, top: 67.8, delay: 2.1, size: 2.1, opacity: 0.9 },
-  { id: 3, left: 35.9, top: 8.5, delay: 0.7, size: 1.5, opacity: 0.6 },
-  { id: 4, left: 45.1, top: 45.2, delay: 1.8, size: 1.9, opacity: 0.8 },
-  { id: 5, left: 55.6, top: 78.3, delay: 0.4, size: 1.3, opacity: 0.4 },
-  { id: 6, left: 65.2, top: 23.7, delay: 2.5, size: 2.3, opacity: 0.7 },
-  { id: 7, left: 75.8, top: 56.9, delay: 1.1, size: 1.7, opacity: 0.9 },
-  { id: 8, left: 85.4, top: 89.1, delay: 0.9, size: 1.4, opacity: 0.5 },
-  { id: 9, left: 92.1, top: 15.6, delay: 2.3, size: 2.0, opacity: 0.8 },
-  { id: 10, left: 8.7, top: 42.3, delay: 1.5, size: 1.6, opacity: 0.6 },
-  { id: 11, left: 18.3, top: 71.5, delay: 0.6, size: 1.1, opacity: 0.4 },
-  { id: 12, left: 28.9, top: 19.8, delay: 2.8, size: 2.2, opacity: 0.7 },
-  { id: 13, left: 38.5, top: 84.2, delay: 1.3, size: 1.8, opacity: 0.9 },
-  { id: 14, left: 48.1, top: 31.6, delay: 0.2, size: 1.4, opacity: 0.5 },
-  { id: 15, left: 58.7, top: 62.9, delay: 1.9, size: 2.0, opacity: 0.8 },
-  { id: 16, left: 68.3, top: 7.3, delay: 0.8, size: 1.7, opacity: 0.6 },
-  { id: 17, left: 78.9, top: 48.7, delay: 2.4, size: 1.3, opacity: 0.4 },
-  { id: 18, left: 88.5, top: 73.1, delay: 1.6, size: 2.1, opacity: 0.7 },
-  { id: 19, left: 3.1, top: 95.4, delay: 0.5, size: 1.9, opacity: 0.9 },
-  { id: 20, left: 12.7, top: 28.7, delay: 2.2, size: 1.5, opacity: 0.5 },
-  { id: 21, left: 22.3, top: 59.1, delay: 1.0, size: 1.2, opacity: 0.8 },
-  { id: 22, left: 32.9, top: 3.5, delay: 2.7, size: 2.3, opacity: 0.6 },
-  { id: 23, left: 42.5, top: 37.8, delay: 0.1, size: 1.6, opacity: 0.4 },
-  { id: 24, left: 52.1, top: 68.2, delay: 1.7, size: 1.8, opacity: 0.7 },
-  { id: 25, left: 62.7, top: 14.6, delay: 0.3, size: 1.4, opacity: 0.9 },
-  { id: 26, left: 72.3, top: 51.9, delay: 2.0, size: 2.0, opacity: 0.5 },
-  { id: 27, left: 82.9, top: 82.3, delay: 1.4, size: 1.7, opacity: 0.8 },
-  { id: 28, left: 93.5, top: 26.7, delay: 0.6, size: 1.3, opacity: 0.6 },
-  { id: 29, left: 7.1, top: 57.1, delay: 2.9, size: 2.2, opacity: 0.4 },
-  { id: 30, left: 16.7, top: 88.4, delay: 1.1, size: 1.9, opacity: 0.7 },
-  { id: 31, left: 26.3, top: 11.8, delay: 0.4, size: 1.5, opacity: 0.9 },
-  { id: 32, left: 36.9, top: 43.2, delay: 2.6, size: 1.1, opacity: 0.5 },
-  { id: 33, left: 46.5, top: 74.5, delay: 1.3, size: 2.3, opacity: 0.8 },
-  { id: 34, left: 56.1, top: 21.9, delay: 0.7, size: 1.6, opacity: 0.6 },
-  { id: 35, left: 66.7, top: 53.3, delay: 2.1, size: 1.8, opacity: 0.4 },
-  { id: 36, left: 76.3, top: 6.7, delay: 1.5, size: 1.4, opacity: 0.7 },
-  { id: 37, left: 86.9, top: 38.1, delay: 0.2, size: 2.0, opacity: 0.9 },
-  { id: 38, left: 97.5, top: 69.4, delay: 2.3, size: 1.7, opacity: 0.5 },
-  { id: 39, left: 4.1, top: 17.8, delay: 1.8, size: 1.3, opacity: 0.8 },
-  { id: 40, left: 13.7, top: 49.2, delay: 0.5, size: 2.1, opacity: 0.6 },
-  { id: 41, left: 23.3, top: 80.5, delay: 2.4, size: 1.9, opacity: 0.4 },
-  { id: 42, left: 33.9, top: 27.9, delay: 1.2, size: 1.5, opacity: 0.7 },
-  { id: 43, left: 43.5, top: 61.3, delay: 0.8, size: 1.2, opacity: 0.9 },
-  { id: 44, left: 53.1, top: 92.6, delay: 2.7, size: 2.2, opacity: 0.5 },
-  { id: 45, left: 63.7, top: 39.0, delay: 1.6, size: 1.6, opacity: 0.8 },
-  { id: 46, left: 73.3, top: 70.4, delay: 0.3, size: 1.8, opacity: 0.6 },
-  { id: 47, left: 83.9, top: 17.7, delay: 2.0, size: 1.4, opacity: 0.4 },
-  { id: 48, left: 94.5, top: 48.1, delay: 1.4, size: 2.0, opacity: 0.7 },
-  { id: 49, left: 9.1, top: 79.5, delay: 0.6, size: 1.7, opacity: 0.9 },
-  { id: 50, left: 19.7, top: 5.8, delay: 2.9, size: 1.3, opacity: 0.5 },
-  { id: 51, left: 29.3, top: 36.2, delay: 1.1, size: 2.3, opacity: 0.8 },
-  { id: 52, left: 39.9, top: 67.6, delay: 0.4, size: 1.9, opacity: 0.6 },
-  { id: 53, left: 49.5, top: 14.9, delay: 2.5, size: 1.5, opacity: 0.4 },
-  { id: 54, left: 59.1, top: 46.3, delay: 1.9, size: 1.1, opacity: 0.7 },
-  { id: 55, left: 69.7, top: 77.7, delay: 0.7, size: 2.1, opacity: 0.9 },
-  { id: 56, left: 79.3, top: 25.0, delay: 2.2, size: 1.7, opacity: 0.5 },
-  { id: 57, left: 89.9, top: 56.4, delay: 1.0, size: 1.4, opacity: 0.8 },
-  { id: 58, left: 1.5, top: 87.7, delay: 0.1, size: 2.0, opacity: 0.6 },
-  { id: 59, left: 11.1, top: 33.1, delay: 2.8, size: 1.6, opacity: 0.4 },
-  { id: 60, left: 20.7, top: 64.5, delay: 1.3, size: 1.8, opacity: 0.7 },
-  { id: 61, left: 30.3, top: 11.8, delay: 0.5, size: 1.2, opacity: 0.9 },
-  { id: 62, left: 40.9, top: 43.2, delay: 2.6, size: 2.3, opacity: 0.5 },
-  { id: 63, left: 50.5, top: 74.6, delay: 1.7, size: 1.9, opacity: 0.8 },
-  { id: 64, left: 60.1, top: 21.9, delay: 0.2, size: 1.5, opacity: 0.6 },
-  { id: 65, left: 70.7, top: 53.3, delay: 2.3, size: 1.1, opacity: 0.4 },
-  { id: 66, left: 80.3, top: 84.7, delay: 1.6, size: 2.2, opacity: 0.7 },
-  { id: 67, left: 90.9, top: 32.0, delay: 0.8, size: 1.7, opacity: 0.9 },
-  { id: 68, left: 6.5, top: 63.4, delay: 2.1, size: 1.3, opacity: 0.5 },
-  { id: 69, left: 17.1, top: 94.7, delay: 1.4, size: 2.0, opacity: 0.8 },
-  { id: 70, left: 27.7, top: 42.1, delay: 0.6, size: 1.6, opacity: 0.6 },
-  { id: 71, left: 37.3, top: 73.4, delay: 2.9, size: 1.8, opacity: 0.4 },
-  { id: 72, left: 47.9, top: 20.8, delay: 1.2, size: 1.4, opacity: 0.7 },
-  { id: 73, left: 57.5, top: 52.2, delay: 0.3, size: 2.1, opacity: 0.9 },
-  { id: 74, left: 67.1, top: 83.5, delay: 2.4, size: 1.9, opacity: 0.5 },
-  { id: 75, left: 77.7, top: 30.9, delay: 1.8, size: 1.5, opacity: 0.8 },
-  { id: 76, left: 87.3, top: 62.2, delay: 0.4, size: 1.2, opacity: 0.6 },
-  { id: 77, left: 97.9, top: 9.6, delay: 2.7, size: 2.3, opacity: 0.4 },
-  { id: 78, left: 2.5, top: 40.9, delay: 1.1, size: 1.7, opacity: 0.7 },
-  { id: 79, left: 14.1, top: 72.3, delay: 0.9, size: 1.3, opacity: 0.9 },
+  { id: 0, left: 5.2, top: 12.4, delay: 0.3, size: 3, opacity: 0.5 },
+  { id: 1, left: 15.7, top: 34.1, delay: 1.2, size: 2, opacity: 0.4 },
+  { id: 2, left: 25.3, top: 67.8, delay: 2.1, size: 4, opacity: 0.6 },
+  { id: 3, left: 35.9, top: 8.5, delay: 0.7, size: 3, opacity: 0.5 },
+  { id: 4, left: 45.1, top: 45.2, delay: 1.8, size: 3, opacity: 0.7 },
+  { id: 5, left: 55.6, top: 78.3, delay: 0.4, size: 2, opacity: 0.3 },
+  { id: 6, left: 65.2, top: 23.7, delay: 2.5, size: 4, opacity: 0.5 },
+  { id: 7, left: 75.8, top: 56.9, delay: 1.1, size: 3, opacity: 0.6 },
+  { id: 8, left: 85.4, top: 89.1, delay: 0.9, size: 2, opacity: 0.4 },
+  { id: 9, left: 92.1, top: 15.6, delay: 2.3, size: 3, opacity: 0.5 },
+  { id: 10, left: 8.7, top: 42.3, delay: 1.5, size: 3, opacity: 0.4 },
+  { id: 11, left: 18.3, top: 71.5, delay: 0.6, size: 2, opacity: 0.3 },
+  { id: 12, left: 28.9, top: 19.8, delay: 2.8, size: 4, opacity: 0.5 },
+  { id: 13, left: 38.5, top: 84.2, delay: 1.3, size: 3, opacity: 0.6 },
+  { id: 14, left: 48.1, top: 31.6, delay: 0.2, size: 2, opacity: 0.4 },
+  { id: 15, left: 58.7, top: 62.9, delay: 1.9, size: 3, opacity: 0.5 },
+  { id: 16, left: 68.3, top: 7.3, delay: 0.8, size: 3, opacity: 0.4 },
+  { id: 17, left: 78.9, top: 48.7, delay: 2.4, size: 2, opacity: 0.3 },
+  { id: 18, left: 88.5, top: 73.1, delay: 1.6, size: 4, opacity: 0.5 },
+  { id: 19, left: 3.1, top: 95.4, delay: 0.5, size: 3, opacity: 0.6 },
+  { id: 20, left: 12.7, top: 28.7, delay: 2.2, size: 2, opacity: 0.4 },
+  { id: 21, left: 22.3, top: 59.1, delay: 1.0, size: 2, opacity: 0.5 },
+  { id: 22, left: 32.9, top: 3.5, delay: 2.7, size: 4, opacity: 0.4 },
+  { id: 23, left: 42.5, top: 37.8, delay: 0.1, size: 3, opacity: 0.3 },
+  { id: 24, left: 52.1, top: 68.2, delay: 1.7, size: 3, opacity: 0.5 },
+  { id: 25, left: 62.7, top: 14.6, delay: 0.3, size: 2, opacity: 0.6 },
+  { id: 26, left: 72.3, top: 51.9, delay: 2.0, size: 3, opacity: 0.4 },
+  { id: 27, left: 82.9, top: 82.3, delay: 1.4, size: 3, opacity: 0.5 },
+  { id: 28, left: 93.5, top: 26.7, delay: 0.6, size: 2, opacity: 0.4 },
+  { id: 29, left: 7.1, top: 57.1, delay: 2.9, size: 4, opacity: 0.3 },
+  { id: 30, left: 16.7, top: 88.4, delay: 1.1, size: 3, opacity: 0.5 },
+  { id: 31, left: 26.3, top: 11.8, delay: 0.4, size: 2, opacity: 0.6 },
+  { id: 32, left: 36.9, top: 43.2, delay: 2.6, size: 2, opacity: 0.4 },
+  { id: 33, left: 46.5, top: 74.5, delay: 1.3, size: 4, opacity: 0.5 },
+  { id: 34, left: 56.1, top: 21.9, delay: 0.7, size: 3, opacity: 0.4 },
+  { id: 35, left: 66.7, top: 53.3, delay: 2.1, size: 3, opacity: 0.3 },
+  { id: 36, left: 76.3, top: 6.7, delay: 1.5, size: 2, opacity: 0.5 },
+  { id: 37, left: 86.9, top: 38.1, delay: 0.2, size: 3, opacity: 0.6 },
+  { id: 38, left: 97.5, top: 69.4, delay: 2.3, size: 3, opacity: 0.4 },
+  { id: 39, left: 4.1, top: 17.8, delay: 1.8, size: 2, opacity: 0.5 },
 ];
 
 const PARTICLES = [
@@ -95,10 +55,6 @@ const PARTICLES = [
   { id: 5, left: 55.6, size: 7, duration: 12, delay: 6, emoji: "⭐" },
   { id: 6, left: 65.2, size: 11, duration: 24, delay: 3, emoji: "🌟" },
   { id: 7, left: 75.8, size: 6, duration: 15, delay: 8, emoji: "💫" },
-  { id: 8, left: 85.4, size: 8, duration: 19, delay: 0, emoji: "✨" },
-  { id: 9, left: 92.1, size: 5, duration: 13, delay: 5, emoji: "⭐" },
-  { id: 10, left: 8.7, size: 10, duration: 21, delay: 2, emoji: "🌟" },
-  { id: 11, left: 48.3, size: 7, duration: 17, delay: 9, emoji: "💫" },
 ];
 
 export default function Home() {
@@ -152,7 +108,7 @@ export default function Home() {
       name: "PSA鑑定",
       subtitle: "Professional Sports Authenticator",
       color: "psa-grade",
-      accentColor: "#4a90d9",
+      accentColor: "#3b82f6",
       description: "世界最大・最も信頼性の高い鑑定機関。PSAグレードはポケカ市場で最も認知されており、高い流動性と資産価値を誇ります。",
       features: ["ポケカ市場で最高の認知度", "10段階グレーディング", "PSA公式サイトで真贋確認", "高い市場流動性"],
       badge: "PSA",
@@ -161,7 +117,7 @@ export default function Home() {
       name: "BGS鑑定",
       subtitle: "Beckett Grading Services",
       color: "bgs-grade",
-      accentColor: "#e94560",
+      accentColor: "#8b5cf6",
       description: "センタリング・表面・角・縁の4項目を個別評価するサブグレード制度が特徴。コレクターに人気の詳細な評価システムです。",
       features: ["4項目サブグレード", "ブラックラベル（10/10/10/10）", "詳細なコンディション評価", "プレミアムケース"],
       badge: "BGS",
@@ -170,7 +126,7 @@ export default function Home() {
       name: "CGC鑑定",
       subtitle: "Certified Guaranty Company",
       color: "cgc-grade",
-      accentColor: "#4caf50",
+      accentColor: "#10b981",
       description: "競争力のある価格と高品質なサービスで急成長中の鑑定機関。ポケカコレクターにも注目されています。",
       features: ["コスパ優秀", "急成長の認知度", "高品質ケース", "ポケカ対応実績多数"],
       badge: "CGC",
@@ -257,16 +213,51 @@ export default function Home() {
   ];
 
   const pokemonTypes = [
-    { name: "旧裏・初期カード", color: "#ffd700", desc: "第1弾〜旧裏面カード" },
-    { name: "SR・SAR・UR", color: "#e94560", desc: "スペシャルレアリティ" },
-    { name: "プロモカード", color: "#4a90d9", desc: "非売品・限定プロモ" },
-    { name: "スタンダード", color: "#4caf50", desc: "現行レギュレーション" },
-    { name: "旧裏リバイバル", color: "#9c27b0", desc: "復刻・リメイクカード" },
-    { name: "海外版ポケカ", color: "#ff9800", desc: "英語版・海外限定版" },
+    { name: "旧裏・初期カード", color: "#6366f1", desc: "第1弾〜旧裏面カード" },
+    { name: "SR・SAR・UR", color: "#ec4899", desc: "スペシャルレアリティ" },
+    { name: "プロモカード", color: "#06b6d4", desc: "非売品・限定プロモ" },
+    { name: "スタンダード", color: "#10b981", desc: "現行レギュレーション" },
+    { name: "旧裏リバイバル", color: "#8b5cf6", desc: "復刻・リメイクカード" },
+    { name: "海外版ポケカ", color: "#f59e0b", desc: "英語版・海外限定版" },
   ];
 
   return (
-    <div className="relative min-h-screen" style={{ background: "var(--pokemon-darker)" }}>
+    <div className="relative min-h-screen" style={{ background: "linear-gradient(135deg, #e8eeff 0%, #f0e8ff 30%, #ffe8f5 60%, #e8f5ff 100%)", backgroundAttachment: "fixed" }}>
+      {/* Aurora background blobs */}
+      <div
+        className="aurora-blob"
+        style={{
+          width: "600px",
+          height: "600px",
+          background: "radial-gradient(circle, rgba(110, 231, 247, 0.5) 0%, rgba(167, 139, 250, 0.3) 50%, transparent 70%)",
+          top: "10%",
+          left: "5%",
+          animation: "aurora 15s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="aurora-blob"
+        style={{
+          width: "500px",
+          height: "500px",
+          background: "radial-gradient(circle, rgba(249, 168, 212, 0.5) 0%, rgba(167, 139, 250, 0.3) 50%, transparent 70%)",
+          top: "40%",
+          right: "5%",
+          animation: "aurora 18s ease-in-out infinite reverse",
+        }}
+      />
+      <div
+        className="aurora-blob"
+        style={{
+          width: "400px",
+          height: "400px",
+          background: "radial-gradient(circle, rgba(147, 197, 253, 0.5) 0%, rgba(110, 231, 247, 0.3) 50%, transparent 70%)",
+          bottom: "10%",
+          left: "30%",
+          animation: "aurora 12s ease-in-out infinite",
+        }}
+      />
+
       {/* Stars background */}
       <div className="stars-bg">
         {STARS.map((star) => (
@@ -306,10 +297,12 @@ export default function Home() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           background: isScrolled
-            ? "rgba(5, 5, 16, 0.95)"
-            : "transparent",
-          backdropFilter: isScrolled ? "blur(20px)" : "none",
-          borderBottom: isScrolled ? "1px solid rgba(212, 175, 55, 0.2)" : "none",
+            ? "rgba(248, 250, 255, 0.85)"
+            : "rgba(248, 250, 255, 0.6)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: isScrolled ? "1px solid rgba(167, 139, 250, 0.25)" : "1px solid rgba(167, 139, 250, 0.1)",
+          boxShadow: isScrolled ? "0 4px 30px rgba(99, 102, 241, 0.08)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -319,16 +312,16 @@ export default function Home() {
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black"
                 style={{
-                  background: "linear-gradient(135deg, var(--gold), #b8860b)",
-                  color: "#000",
-                  boxShadow: "0 0 15px rgba(212, 175, 55, 0.4)",
+                  background: "linear-gradient(135deg, #6366f1, #a78bfa)",
+                  color: "#fff",
+                  boxShadow: "0 0 15px rgba(99, 102, 241, 0.35)",
                 }}
               >
                 G
               </div>
               <div>
                 <div className="font-black text-lg leading-none gradient-text">ポケグレ</div>
-                <div className="text-xs text-gray-400 leading-none">ポケカ鑑定代行</div>
+                <div className="text-xs leading-none" style={{ color: "var(--text-muted)" }}>ポケカ鑑定代行</div>
               </div>
             </div>
 
@@ -345,12 +338,13 @@ export default function Home() {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden text-white p-2"
+              className="md:hidden p-2"
+              style={{ color: "var(--text-dark)" }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <div className="w-6 h-0.5 bg-white mb-1.5 transition-all" style={{ transform: mobileMenuOpen ? "rotate(45deg) translate(4px, 4px)" : "none" }} />
-              <div className="w-6 h-0.5 bg-white mb-1.5 transition-all" style={{ opacity: mobileMenuOpen ? 0 : 1 }} />
-              <div className="w-6 h-0.5 bg-white transition-all" style={{ transform: mobileMenuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none" }} />
+              <div className="w-6 h-0.5 mb-1.5 transition-all" style={{ background: "var(--text-dark)", transform: mobileMenuOpen ? "rotate(45deg) translate(4px, 4px)" : "none" }} />
+              <div className="w-6 h-0.5 mb-1.5 transition-all" style={{ background: "var(--text-dark)", opacity: mobileMenuOpen ? 0 : 1 }} />
+              <div className="w-6 h-0.5 transition-all" style={{ background: "var(--text-dark)", transform: mobileMenuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none" }} />
             </button>
           </div>
 
@@ -358,7 +352,7 @@ export default function Home() {
           {mobileMenuOpen && (
             <div
               className="md:hidden py-4 border-t"
-              style={{ borderColor: "rgba(212, 175, 55, 0.2)" }}
+              style={{ borderColor: "rgba(167, 139, 250, 0.2)" }}
             >
               <div className="flex flex-col gap-4">
                 <a href="#services" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>鑑定機関</a>
@@ -377,7 +371,7 @@ export default function Home() {
       {/* Info bar */}
       <div className="info-bar relative z-10 pt-16 md:pt-20">
         <div className="max-w-7xl mx-auto px-4 py-2">
-          <p className="text-center text-xs md:text-sm" style={{ color: "var(--gold)" }}>
+          <p className="text-center text-xs md:text-sm" style={{ color: "#6366f1" }}>
             🔔 <strong>【最新情報】</strong> 次回PSA・BGS締め切り：3月4日(水) ／ 発送予定：3月11日(水)
           </p>
         </div>
@@ -407,9 +401,9 @@ export default function Home() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-6"
             style={{
-              background: "rgba(212, 175, 55, 0.1)",
-              border: "1px solid rgba(212, 175, 55, 0.4)",
-              color: "var(--gold)",
+              background: "rgba(99, 102, 241, 0.08)",
+              border: "1px solid rgba(99, 102, 241, 0.25)",
+              color: "#6366f1",
             }}
           >
             <span>🎴</span>
@@ -418,15 +412,15 @@ export default function Home() {
           </div>
 
           {/* Main heading */}
-          <h1 className="font-black leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)" }}>
+          <h1 className="font-black leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "var(--text-dark)" }}>
             <span className="gradient-text-pokemon">ポケカ</span>
-            <span className="text-white">の価値を</span>
+            <span>の価値を</span>
             <br />
             <span className="gradient-text">世界基準</span>
-            <span className="text-white">で証明する</span>
+            <span>で証明する</span>
           </h1>
 
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed" style={{ color: "var(--text-muted)" }}>
             ポケモンカード専門の鑑定代行サービス。<br />
             PSA・BGS・CGCへFedExアメリカ直送で、<br className="hidden md:block" />
             あなたの大切なポケカを安全・確実に鑑定。
@@ -437,11 +431,11 @@ export default function Home() {
             {["旧裏・初期カード", "SR・SAR・UR", "プロモカード", "海外版ポケカ"].map((type) => (
               <span
                 key={type}
-                className="text-xs px-3 py-1 rounded-full"
+                className="text-xs px-3 py-1 rounded-full font-medium"
                 style={{
-                  background: "rgba(212, 175, 55, 0.1)",
-                  border: "1px solid rgba(212, 175, 55, 0.3)",
-                  color: "rgba(212, 175, 55, 0.9)",
+                  background: "rgba(99, 102, 241, 0.08)",
+                  border: "1px solid rgba(99, 102, 241, 0.2)",
+                  color: "#6366f1",
                 }}
               >
                 {type}
@@ -466,7 +460,7 @@ export default function Home() {
                 className="glass-card rounded-2xl p-4"
               >
                 <div className="font-black text-2xl md:text-3xl gradient-text">{stat.value}</div>
-                <div className="text-gray-400 text-xs mt-1">{stat.label}</div>
+                <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -476,11 +470,11 @@ export default function Home() {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
           <div
             className="w-6 h-10 rounded-full border-2 flex items-start justify-center pt-2"
-            style={{ borderColor: "rgba(212, 175, 55, 0.4)" }}
+            style={{ borderColor: "rgba(99, 102, 241, 0.35)" }}
           >
             <div
               className="w-1 h-3 rounded-full"
-              style={{ background: "var(--gold)", animation: "float 1.5s ease-in-out infinite" }}
+              style={{ background: "linear-gradient(180deg, #6366f1, #a78bfa)", animation: "float 1.5s ease-in-out infinite" }}
             />
           </div>
         </div>
@@ -493,14 +487,14 @@ export default function Home() {
             <div
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
               style={{
-                background: "rgba(212, 175, 55, 0.1)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                color: "var(--gold)",
+                background: "rgba(99, 102, 241, 0.08)",
+                border: "1px solid rgba(99, 102, 241, 0.2)",
+                color: "#6366f1",
               }}
             >
               POKEMON CARDS
             </div>
-            <h2 className="section-title text-white">
+            <h2 className="section-title">
               あらゆる<span className="gradient-text">ポケカ</span>に対応
             </h2>
             <p className="section-subtitle">
@@ -520,8 +514,8 @@ export default function Home() {
                   style={{ background: `linear-gradient(180deg, ${type.color}, ${type.color}60)` }}
                 />
                 <div>
-                  <div className="font-black text-white text-sm md:text-base">{type.name}</div>
-                  <div className="text-gray-400 text-xs mt-0.5">{type.desc}</div>
+                  <div className="font-black text-sm md:text-base" style={{ color: "var(--text-dark)" }}>{type.name}</div>
+                  <div className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>{type.desc}</div>
                 </div>
               </div>
             ))}
@@ -530,11 +524,11 @@ export default function Home() {
           <div
             className="mt-8 rounded-2xl p-5 text-center"
             style={{
-              background: "rgba(212, 175, 55, 0.05)",
-              border: "1px solid rgba(212, 175, 55, 0.2)",
+              background: "rgba(99, 102, 241, 0.05)",
+              border: "1px solid rgba(99, 102, 241, 0.15)",
             }}
           >
-            <p className="text-gray-300 text-sm">
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
               <span className="gradient-text font-bold">ポケモンカード専門</span>だからこそ、カードの価値・状態を正確に把握。
               希少カードの取り扱い実績も豊富です。
             </p>
@@ -549,14 +543,14 @@ export default function Home() {
             <div
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
               style={{
-                background: "rgba(212, 175, 55, 0.1)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                color: "var(--gold)",
+                background: "rgba(99, 102, 241, 0.08)",
+                border: "1px solid rgba(99, 102, 241, 0.2)",
+                color: "#6366f1",
               }}
             >
               GRADING SERVICES
             </div>
-            <h2 className="section-title text-white">
+            <h2 className="section-title">
               3つの<span className="gradient-text">鑑定機関</span>に対応
             </h2>
             <p className="section-subtitle">
@@ -570,39 +564,40 @@ export default function Home() {
                 key={i}
                 className={`${service.color} rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 cursor-default`}
                 style={{
-                  boxShadow: `0 0 30px ${service.accentColor}20`,
+                  boxShadow: `0 0 30px ${service.accentColor}15`,
                   transition: "all 0.3s ease",
+                  backdropFilter: "blur(12px)",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${service.accentColor}40, 0 0 40px ${service.accentColor}20`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${service.accentColor}30, 0 0 40px ${service.accentColor}15`;
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${service.accentColor}20`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${service.accentColor}15`;
                 }}
               >
                 {/* Badge */}
                 <div
                   className="inline-flex items-center justify-center w-16 h-16 rounded-2xl font-black text-xl mb-6"
                   style={{
-                    background: `${service.accentColor}20`,
-                    border: `2px solid ${service.accentColor}`,
+                    background: `${service.accentColor}15`,
+                    border: `2px solid ${service.accentColor}50`,
                     color: service.accentColor,
                   }}
                 >
                   {service.badge}
                 </div>
 
-                <h3 className="text-2xl font-black text-white mb-1">{service.name}</h3>
+                <h3 className="text-2xl font-black mb-1" style={{ color: "var(--text-dark)" }}>{service.name}</h3>
                 <p className="text-xs mb-4" style={{ color: service.accentColor }}>
                   {service.subtitle}
                 </p>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-muted)" }}>
                   {service.description}
                 </p>
 
                 <ul className="space-y-2">
                   {service.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-gray-300">
+                    <li key={j} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-muted)" }}>
                       <span style={{ color: service.accentColor }}>✓</span>
                       {f}
                     </li>
@@ -618,7 +613,7 @@ export default function Home() {
       <section
         className="relative z-10 py-24"
         style={{
-          background: "linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.03), transparent)",
+          background: "linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03), transparent)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -627,17 +622,17 @@ export default function Home() {
               <div
                 className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
                 style={{
-                  background: "rgba(212, 175, 55, 0.1)",
-                  border: "1px solid rgba(212, 175, 55, 0.3)",
-                  color: "var(--gold)",
+                  background: "rgba(99, 102, 241, 0.08)",
+                  border: "1px solid rgba(99, 102, 241, 0.2)",
+                  color: "#6366f1",
                 }}
               >
                 WHY GRADING?
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight" style={{ color: "var(--text-dark)" }}>
                 なぜポケカに<br /><span className="gradient-text">グレーディング</span>が<br />必要なのか？
               </h2>
-              <p className="text-gray-300 leading-relaxed mb-8">
+              <p className="leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
                 ポケモンカードの価値は、そのコンディションによって大きく左右されます。
                 グレーディングを行うことで、カードの真贋と状態が第三者機関によって証明され、
                 売買時の信頼性が格段に向上します。
@@ -653,8 +648,8 @@ export default function Home() {
                   <div key={i} className="flex items-start gap-4 glass-card rounded-2xl p-4">
                     <span className="text-2xl">{item.icon}</span>
                     <div>
-                      <div className="font-bold text-white mb-1">{item.title}</div>
-                      <div className="text-gray-400 text-sm">{item.desc}</div>
+                      <div className="font-bold mb-1" style={{ color: "var(--text-dark)" }}>{item.title}</div>
+                      <div className="text-sm" style={{ color: "var(--text-muted)" }}>{item.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -665,15 +660,15 @@ export default function Home() {
             <div className="relative">
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { grade: "10", label: "Gem Mint", color: "#ffd700", desc: "完璧な状態" },
-                  { grade: "9", label: "Mint", color: "#c0c0c0", desc: "ほぼ完璧" },
-                  { grade: "8", label: "NM-MT", color: "#cd7f32", desc: "非常に良い" },
-                  { grade: "7", label: "Near Mint", color: "#4a90d9", desc: "良い状態" },
+                  { grade: "10", label: "Gem Mint", color: "#6366f1", desc: "完璧な状態" },
+                  { grade: "9", label: "Mint", color: "#8b5cf6", desc: "ほぼ完璧" },
+                  { grade: "8", label: "NM-MT", color: "#06b6d4", desc: "非常に良い" },
+                  { grade: "7", label: "Near Mint", color: "#10b981", desc: "良い状態" },
                 ].map((g, i) => (
                   <div
                     key={i}
                     className="glass-card rounded-2xl p-6 text-center"
-                    style={{ borderColor: `${g.color}40` }}
+                    style={{ borderColor: `${g.color}30` }}
                   >
                     <div
                       className="text-5xl font-black mb-2"
@@ -681,16 +676,16 @@ export default function Home() {
                     >
                       {g.grade}
                     </div>
-                    <div className="font-bold text-white text-sm">{g.label}</div>
-                    <div className="text-gray-400 text-xs mt-1">{g.desc}</div>
+                    <div className="font-bold text-sm" style={{ color: "var(--text-dark)" }}>{g.label}</div>
+                    <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{g.desc}</div>
                   </div>
                 ))}
               </div>
               <div
                 className="mt-4 glass-card rounded-2xl p-4 text-center"
-                style={{ borderColor: "rgba(212, 175, 55, 0.3)" }}
+                style={{ borderColor: "rgba(99, 102, 241, 0.2)" }}
               >
-                <p className="text-sm text-gray-300">
+                <p className="text-sm" style={{ color: "var(--text-muted)" }}>
                   <span className="gradient-text font-bold">PSA・BGS・CGC</span> は10段階でポケカを評価。<br />
                   グレードが高いほど、市場価値が大幅に上昇します。
                 </p>
@@ -707,14 +702,14 @@ export default function Home() {
             <div
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
               style={{
-                background: "rgba(212, 175, 55, 0.1)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                color: "var(--gold)",
+                background: "rgba(99, 102, 241, 0.08)",
+                border: "1px solid rgba(99, 102, 241, 0.2)",
+                color: "#6366f1",
               }}
             >
               HOW IT WORKS
             </div>
-            <h2 className="section-title text-white">
+            <h2 className="section-title">
               <span className="gradient-text">6ステップ</span>で完了
             </h2>
             <p className="section-subtitle">
@@ -728,7 +723,7 @@ export default function Home() {
                 {/* Background number */}
                 <div
                   className="absolute top-4 right-4 text-8xl font-black opacity-5 group-hover:opacity-10 transition-opacity"
-                  style={{ color: "var(--gold)" }}
+                  style={{ color: "#6366f1" }}
                 >
                   {step.num}
                 </div>
@@ -736,18 +731,18 @@ export default function Home() {
                 <div className="text-4xl mb-4">{step.icon}</div>
                 <div
                   className="text-xs font-bold mb-2"
-                  style={{ color: "var(--gold)" }}
+                  style={{ color: "#6366f1" }}
                 >
                   STEP {step.num}
                 </div>
-                <h3 className="text-xl font-black text-white mb-3">{step.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{step.desc}</p>
+                <h3 className="text-xl font-black mb-3" style={{ color: "var(--text-dark)" }}>{step.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{step.desc}</p>
 
                 {/* Connector arrow */}
                 {i < steps.length - 1 && (
                   <div
                     className="hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-xl z-10"
-                    style={{ color: "var(--gold)" }}
+                    style={{ color: "#a78bfa" }}
                   >
                     →
                   </div>
@@ -769,7 +764,7 @@ export default function Home() {
         id="pricing"
         className="relative z-10 py-24"
         style={{
-          background: "linear-gradient(180deg, transparent, rgba(59, 76, 202, 0.05), transparent)",
+          background: "linear-gradient(180deg, transparent, rgba(167, 139, 250, 0.05), transparent)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -777,14 +772,14 @@ export default function Home() {
             <div
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
               style={{
-                background: "rgba(212, 175, 55, 0.1)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                color: "var(--gold)",
+                background: "rgba(99, 102, 241, 0.08)",
+                border: "1px solid rgba(99, 102, 241, 0.2)",
+                color: "#6366f1",
               }}
             >
               PRICING
             </div>
-            <h2 className="section-title text-white">
+            <h2 className="section-title">
               シンプルな<span className="gradient-text">料金プラン</span>
             </h2>
             <p className="section-subtitle">
@@ -796,19 +791,19 @@ export default function Home() {
             {plans.map((plan, i) => (
               <div key={i} className={`price-card ${plan.featured ? "featured" : ""}`}>
                 <div className="mb-6">
-                  <div className="text-xs font-semibold text-gray-400 mb-1">{plan.nameEn}</div>
-                  <h3 className="text-2xl font-black text-white">{plan.name}</h3>
-                  <p className="text-gray-400 text-sm mt-2">{plan.description}</p>
+                  <div className="text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>{plan.nameEn}</div>
+                  <h3 className="text-2xl font-black" style={{ color: "var(--text-dark)" }}>{plan.name}</h3>
+                  <p className="text-sm mt-2" style={{ color: "var(--text-muted)" }}>{plan.description}</p>
                 </div>
 
                 <div className="mb-6">
                   <div className="flex items-end gap-1">
                     <span className="text-4xl font-black gradient-text">¥{plan.price}</span>
-                    <span className="text-gray-400 text-sm mb-1">{plan.unit}</span>
+                    <span className="text-sm mb-1" style={{ color: "var(--text-muted)" }}>{plan.unit}</span>
                   </div>
                   <div
                     className="text-sm mt-2 font-semibold"
-                    style={{ color: "var(--gold)" }}
+                    style={{ color: "#6366f1" }}
                   >
                     ⏱ {plan.turnaround}
                   </div>
@@ -816,7 +811,7 @@ export default function Home() {
 
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm text-gray-300">
+                    <li key={j} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-muted)" }}>
                       <span className="gradient-text">✓</span>
                       {f}
                     </li>
@@ -842,8 +837,8 @@ export default function Home() {
             ].map((item, i) => (
               <div key={i} className="glass-card rounded-2xl p-4 text-center">
                 <div className="text-2xl mb-2">{item.icon}</div>
-                <div className="font-bold text-white text-sm mb-1">{item.title}</div>
-                <div className="text-gray-400 text-xs">{item.desc}</div>
+                <div className="font-bold text-sm mb-1" style={{ color: "var(--text-dark)" }}>{item.title}</div>
+                <div className="text-xs" style={{ color: "var(--text-muted)" }}>{item.desc}</div>
               </div>
             ))}
           </div>
@@ -855,7 +850,7 @@ export default function Home() {
         id="faq"
         className="relative z-10 py-24"
         style={{
-          background: "linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.03), transparent)",
+          background: "linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03), transparent)",
         }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -863,14 +858,14 @@ export default function Home() {
             <div
               className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
               style={{
-                background: "rgba(212, 175, 55, 0.1)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                color: "var(--gold)",
+                background: "rgba(99, 102, 241, 0.08)",
+                border: "1px solid rgba(99, 102, 241, 0.2)",
+                color: "#6366f1",
               }}
             >
               FAQ
             </div>
-            <h2 className="section-title text-white">
+            <h2 className="section-title">
               よくある<span className="gradient-text">ご質問</span>
             </h2>
           </div>
@@ -880,17 +875,17 @@ export default function Home() {
               <div
                 key={i}
                 className="glass-card rounded-2xl overflow-hidden"
-                style={{ borderColor: openFaq === i ? "rgba(212, 175, 55, 0.4)" : "rgba(212, 175, 55, 0.15)" }}
+                style={{ borderColor: openFaq === i ? "rgba(99, 102, 241, 0.4)" : "rgba(167, 139, 250, 0.15)" }}
               >
                 <button
                   className="faq-question w-full text-left px-6"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  style={{ color: openFaq === i ? "var(--gold)" : "white" }}
+                  style={{ color: openFaq === i ? "#6366f1" : "var(--text-dark)" }}
                 >
                   <span className="flex items-start gap-3">
                     <span
                       className="font-black text-sm mt-0.5 flex-shrink-0"
-                      style={{ color: "var(--gold)" }}
+                      style={{ color: "#6366f1" }}
                     >
                       Q.
                     </span>
@@ -899,7 +894,7 @@ export default function Home() {
                   <span
                     className="text-xl flex-shrink-0 transition-transform duration-300"
                     style={{
-                      color: "var(--gold)",
+                      color: "#a78bfa",
                       transform: openFaq === i ? "rotate(45deg)" : "none",
                     }}
                   >
@@ -911,16 +906,16 @@ export default function Home() {
                   <div className="px-6 pb-5">
                     <div
                       className="pt-4 border-t"
-                      style={{ borderColor: "rgba(212, 175, 55, 0.15)" }}
+                      style={{ borderColor: "rgba(167, 139, 250, 0.15)" }}
                     >
                       <div className="flex items-start gap-3">
                         <span
                           className="font-black text-sm mt-0.5 flex-shrink-0"
-                          style={{ color: "var(--gold)" }}
+                          style={{ color: "#6366f1" }}
                         >
                           A.
                         </span>
-                        <p className="text-gray-300 text-sm leading-relaxed">{faq.a}</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{faq.a}</p>
                       </div>
                     </div>
                   </div>
@@ -937,30 +932,31 @@ export default function Home() {
           <div
             className="rounded-3xl p-12 text-center relative overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(59, 76, 202, 0.1))",
-              border: "1px solid rgba(212, 175, 55, 0.3)",
+              background: "linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(167, 139, 250, 0.1), rgba(249, 168, 212, 0.08))",
+              border: "1px solid rgba(167, 139, 250, 0.25)",
+              backdropFilter: "blur(20px)",
             }}
           >
             {/* Decorative elements */}
             <div
-              className="absolute top-0 left-0 w-full h-full opacity-5"
+              className="absolute top-0 left-0 w-full h-full opacity-30"
               style={{
-                background: "radial-gradient(circle at 30% 50%, var(--gold) 0%, transparent 60%)",
+                background: "radial-gradient(circle at 30% 50%, rgba(110, 231, 247, 0.3) 0%, transparent 60%)",
               }}
             />
             <div
-              className="absolute top-0 right-0 w-full h-full opacity-5"
+              className="absolute top-0 right-0 w-full h-full opacity-30"
               style={{
-                background: "radial-gradient(circle at 70% 50%, var(--pokemon-blue) 0%, transparent 60%)",
+                background: "radial-gradient(circle at 70% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 60%)",
               }}
             />
 
             <div className="relative z-10">
               <div className="text-5xl mb-6">🎴</div>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+              <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: "var(--text-dark)" }}>
                 今すぐ<span className="gradient-text">ポケカ鑑定</span>を始めよう
               </h2>
-              <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
+              <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: "var(--text-muted)" }}>
                 あなたの大切なポケモンカードの価値を、世界基準で証明しましょう。
                 LINEまたはメールでお気軽にお問い合わせください。
               </p>
@@ -990,11 +986,11 @@ export default function Home() {
                   <div
                     key={i}
                     className="rounded-xl p-3"
-                    style={{ background: "rgba(255, 255, 255, 0.05)" }}
+                    style={{ background: "rgba(255, 255, 255, 0.5)" }}
                   >
                     <div className="text-lg mb-1">{info.icon}</div>
-                    <div className="text-gray-400 text-xs">{info.label}</div>
-                    <div className="text-white text-xs font-semibold mt-0.5">{info.value}</div>
+                    <div className="text-xs" style={{ color: "var(--text-muted)" }}>{info.label}</div>
+                    <div className="text-xs font-semibold mt-0.5" style={{ color: "var(--text-dark)" }}>{info.value}</div>
                   </div>
                 ))}
               </div>
@@ -1006,7 +1002,11 @@ export default function Home() {
       {/* Footer */}
       <footer
         className="relative z-10 py-12 border-t"
-        style={{ borderColor: "rgba(212, 175, 55, 0.15)" }}
+        style={{
+          borderColor: "rgba(167, 139, 250, 0.15)",
+          background: "rgba(255, 255, 255, 0.4)",
+          backdropFilter: "blur(12px)",
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -1016,29 +1016,29 @@ export default function Home() {
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black"
                   style={{
-                    background: "linear-gradient(135deg, var(--gold), #b8860b)",
-                    color: "#000",
+                    background: "linear-gradient(135deg, #6366f1, #a78bfa)",
+                    color: "#fff",
                   }}
                 >
                   G
                 </div>
                 <div>
                   <div className="font-black text-lg leading-none gradient-text">ポケグレ</div>
-                  <div className="text-xs text-gray-400 leading-none">ポケカ鑑定代行</div>
+                  <div className="text-xs leading-none" style={{ color: "var(--text-muted)" }}>ポケカ鑑定代行</div>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+              <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-muted)" }}>
                 ポケモンカード専門の鑑定代行サービス。PSA・BGS・CGCへのFedEx直送で、あなたの大切なポケカを世界基準で鑑定します。
               </p>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="font-bold text-white mb-4 text-sm">サービス</h4>
+              <h4 className="font-bold mb-4 text-sm" style={{ color: "var(--text-dark)" }}>サービス</h4>
               <ul className="space-y-2">
                 {["PSA鑑定代行", "BGS鑑定代行", "CGC鑑定代行", "料金プラン", "申込方法"].map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-gray-400 text-sm hover:text-yellow-400 transition-colors">
+                    <a href="#" className="text-sm transition-colors hover:text-indigo-500" style={{ color: "var(--text-muted)" }}>
                       {link}
                     </a>
                   </li>
@@ -1047,11 +1047,11 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-4 text-sm">サポート</h4>
+              <h4 className="font-bold mb-4 text-sm" style={{ color: "var(--text-dark)" }}>サポート</h4>
               <ul className="space-y-2">
                 {["よくある質問", "梱包方法", "お問い合わせ", "プライバシーポリシー", "利用規約"].map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-gray-400 text-sm hover:text-yellow-400 transition-colors">
+                    <a href="#" className="text-sm transition-colors hover:text-indigo-500" style={{ color: "var(--text-muted)" }}>
                       {link}
                     </a>
                   </li>
@@ -1062,21 +1062,23 @@ export default function Home() {
 
           <div
             className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4"
-            style={{ borderColor: "rgba(212, 175, 55, 0.1)" }}
+            style={{ borderColor: "rgba(167, 139, 250, 0.1)" }}
           >
-            <p className="text-gray-500 text-xs">
+            <p className="text-xs" style={{ color: "var(--text-muted)" }}>
               © 2024 ポケグレ. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <a
                 href="https://twitter.com/gradingservices"
-                className="text-gray-400 hover:text-yellow-400 transition-colors text-sm"
+                className="text-sm transition-colors hover:text-indigo-500"
+                style={{ color: "var(--text-muted)" }}
               >
                 Twitter
               </a>
               <a
                 href="https://lin.ee/40XcCAh"
-                className="text-gray-400 hover:text-yellow-400 transition-colors text-sm"
+                className="text-sm transition-colors hover:text-indigo-500"
+                style={{ color: "var(--text-muted)" }}
               >
                 LINE
               </a>

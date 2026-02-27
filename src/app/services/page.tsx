@@ -25,17 +25,7 @@ const services = [
     badge: "BGS",
     turnaround: "約3〜4ヶ月（エコノミー）〜1〜2ヶ月（エクスプレス）",
   },
-  {
-    name: "CGC鑑定",
-    subtitle: "Certified Guaranty Company",
-    color: "cgc-grade",
-    accentColor: "#059669",
-    description:
-      "競争力のある価格と高品質なサービスで急成長中の鑑定機関。もともとコミックブック鑑定で有名なCGCが、トレーディングカード市場に参入。ポケカコレクターにも注目されています。",
-    features: ["コスパ優秀な価格設定", "急成長の市場認知度", "高品質ケース封入", "ポケカ対応実績多数", "CGC公式サイトで真贋確認"],
-    badge: "CGC",
-    turnaround: "約3〜4ヶ月（エコノミー）〜1〜2ヶ月（エクスプレス）",
-  },
+
 ];
 
 const grades = [

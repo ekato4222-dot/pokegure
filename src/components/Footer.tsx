@@ -23,7 +23,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm leading-relaxed max-w-xs" style={{ color: "#6b7280" }}>
-              ポケモンカード専門の鑑定代行サービス。PSA・BGS・CGCへのFedEx直送で、あなたの大切なポケカを世界基準で鑑定します。
+              ポケモンカード専門の鑑定代行サービス。PSA・BGSへのFedEx直送で、あなたの大切なポケカを世界基準で鑑定します。
             </p>
           </div>
 

@@ -10,7 +10,7 @@ const plans = [
     unit: "円〜/枚",
     turnaround: "約3〜4ヶ月",
     description: "コストを抑えてじっくり鑑定",
-    features: ["PSA・BGS・CGC対応", "FedEx直送", "追跡番号提供", "鑑定後ケース返却"],
+    features: ["PSA・BGS対応", "FedEx直送", "追跡番号提供", "鑑定後ケース返却"],
     featured: false,
   },
   {
@@ -20,7 +20,7 @@ const plans = [
     unit: "円〜/枚",
     turnaround: "約2〜3ヶ月",
     description: "バランスの取れた人気プラン",
-    features: ["PSA・BGS・CGC対応", "FedEx直送", "追跡番号提供", "鑑定後ケース返却", "優先受付"],
+    features: ["PSA・BGS対応", "FedEx直送", "追跡番号提供", "鑑定後ケース返却", "優先受付"],
     featured: true,
   },
   {
@@ -30,7 +30,7 @@ const plans = [
     unit: "円〜/枚",
     turnaround: "約1〜2ヶ月",
     description: "急ぎの鑑定に最適",
-    features: ["PSA・BGS・CGC対応", "FedEx直送", "追跡番号提供", "鑑定後ケース返却", "最優先受付", "専任担当者"],
+    features: ["PSA・BGS対応", "FedEx直送", "追跡番号提供", "鑑定後ケース返却", "最優先受付", "専任担当者"],
     featured: false,
   },
 ];

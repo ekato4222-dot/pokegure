@@ -118,7 +118,7 @@ export default function NewOrderPage() {
           <div className="glass-card" style={{ padding: "1.5rem" }}>
             <h2 style={{ fontWeight: 700, marginBottom: "1rem", color: "var(--text-heading)" }}>Step 2: 鑑定機関を選択</h2>
             <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-              {["PSA", "BGS", "CGC"].map((co) => (
+              {["PSA", "BGS"].map((co) => (
                 <button
                   key={co}
                   onClick={() => setGradingCompany(co)}

@@ -36,7 +36,7 @@ const quickLinks = [
     href: "/services",
     icon: "🏅",
     title: "鑑定機関について",
-    desc: "PSA・BGS・CGCの特徴と違いを詳しく解説。あなたに最適な機関を選びましょう。",
+    desc: "PSA・BGSの特徴と違いを詳しく解説。あなたに最適な機関を選びましょう。",
     color: "#6366f1",
   },
   {
@@ -134,7 +134,7 @@ export default function Home() {
             style={{ background: "#eff6ff", border: "1px solid #bfdbfe", color: "#1d4ed8" }}
           >
             <span>🎴</span>
-            <span>ポケモンカード専門 ／ PSA・BGS・CGC対応</span>
+            <span>ポケモンカード専門 ／ PSA・BGS対応</span>
             <span>🎴</span>
           </div>
 
@@ -148,7 +148,7 @@ export default function Home() {
 
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed" style={{ color: "#4b5563" }}>
             ポケモンカード専門の鑑定代行サービス。<br />
-            PSA・BGS・CGCへFedExアメリカ直送で、<br className="hidden md:block" />
+            PSA・BGSへFedExアメリカ直送で、<br className="hidden md:block" />
             あなたの大切なポケカを安全・確実に鑑定。
           </p>
 

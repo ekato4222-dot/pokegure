@@ -50,6 +50,9 @@ export default function Navigation() {
             <Link href="/how-it-works" className="nav-link text-sm">申込方法</Link>
             <Link href="/pricing" className="nav-link text-sm">料金プラン</Link>
             <Link href="/faq" className="nav-link text-sm">よくある質問</Link>
+            <Link href="/login" className="nav-link text-sm">ログイン</Link>
+            <Link href="/dashboard" className="nav-link text-sm">マイページ</Link>
+            <Link href="/admin" className="nav-link text-sm">管理画面</Link>
             <Link href="/contact" className="btn-primary text-sm py-2 px-6">
               今すぐ申し込む
             </Link>
@@ -75,6 +78,9 @@ export default function Navigation() {
               <Link href="/how-it-works" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>申込方法</Link>
               <Link href="/pricing" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>料金プラン</Link>
               <Link href="/faq" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>よくある質問</Link>
+              <Link href="/login" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>ログイン</Link>
+              <Link href="/dashboard" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>マイページ</Link>
+              <Link href="/admin" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>管理画面</Link>
               <Link href="/contact" className="btn-primary text-sm text-center" onClick={() => setMobileMenuOpen(false)}>
                 今すぐ申し込む
               </Link>

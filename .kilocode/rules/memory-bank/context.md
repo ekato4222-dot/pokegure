@@ -107,3 +107,4 @@ export async function GET() {
 |------|---------|
 | Initial | Template created with base setup |
 | 2026-02-27 | Revamped UI to futuristic light gradient theme (aurora blobs, glass morphism, indigo/violet/pink palette) |
+| 2026-02-27 | Redesigned for readability: white base (#fff), high-contrast text (#111827/#374151), solid cards, alternating section bg, indigo CTA |

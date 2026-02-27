@@ -17,8 +17,15 @@ export async function POST(request: NextRequest) {
     }
 
     const hashed = await bcrypt.hash(password, 10);
+    const adminEmails = (process.env.ADMIN_EMAILS || "")
+      .split(",")
+      .map((v: string) => v.trim().toLowerCase())
+      .filter(Boolean);
+
+    const role = adminEmails.includes(String(email).toLowerCase()) ? "admin" : "customer";
+
     const user = await prisma.user.create({
-      data: { email, password: hashed, name, phone },
+      data: { email, password: hashed, name, phone, role },
     });
 
     return NextResponse.json({ id: user.id, email: user.email, name: user.name }, { status: 201 });

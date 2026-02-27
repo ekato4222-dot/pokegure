@@ -21,23 +21,44 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
+        // Vercelテスト環境向け: DB未接続でも入れるデモ管理者
+        const demoAdminEmail = process.env.DEMO_ADMIN_EMAIL?.trim().toLowerCase();
+        const demoAdminPassword = process.env.DEMO_ADMIN_PASSWORD;
+        if (
+          demoAdminEmail &&
+          demoAdminPassword &&
+          credentials.email.toLowerCase() === demoAdminEmail &&
+          credentials.password === demoAdminPassword
+        ) {
+          return {
+            id: "demo-admin",
+            email: credentials.email,
+            name: "Demo Admin",
+            role: "admin",
+          };
+        }
 
-        if (!user) return null;
+        try {
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+          });
 
-        const isValid = await bcrypt.compare(credentials.password, user.password);
-        if (!isValid) return null;
+          if (!user) return null;
 
-        const role = adminEmails.includes(user.email.toLowerCase()) ? "admin" : user.role;
+          const isValid = await bcrypt.compare(credentials.password, user.password);
+          if (!isValid) return null;
 
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          role,
-        };
+          const role = adminEmails.includes(user.email.toLowerCase()) ? "admin" : user.role;
+
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role,
+          };
+        } catch {
+          return null;
+        }
       },
     }),
   ],

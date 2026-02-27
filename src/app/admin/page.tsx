@@ -10,10 +10,15 @@ export default async function AdminPage() {
   if (!session?.user) redirect("/login");
   if ((session.user as { role?: string }).role !== "admin") redirect("/dashboard");
 
-  const orders = await prisma.order.findMany({
-    include: { user: { select: { name: true } } },
-    orderBy: { createdAt: "desc" },
-  });
+  let orders: Array<any> = [];
+  try {
+    orders = await prisma.order.findMany({
+      include: { user: { select: { name: true } } },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {
+    orders = [];
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg-gray)" }}>

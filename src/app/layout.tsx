@@ -1,20 +1,41 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Template",
-  description: "A minimal Next.js starter template",
+  title: "グレサ | ポケカ鑑定代行 PSA・BGS・CGC | GradingServices",
+  description:
+    "ポケモンカード専門の鑑定代行サービス。PSA公式認定代理店として、PSA・BGS・CGCへのFedExアメリカ直送で安全・確実に鑑定代行を行います。ポケカの価値を世界基準で証明しましょう。",
+  keywords: [
+    "ポケモンカード",
+    "ポケカ",
+    "鑑定代行",
+    "PSA",
+    "BGS",
+    "CGC",
+    "グレーディング",
+    "グレサ",
+    "トレーディングカード",
+    "鑑定",
+  ],
+  openGraph: {
+    title: "グレサ | ポケカ鑑定代行 PSA・BGS・CGC",
+    description:
+      "ポケモンカード専門の鑑定代行サービス。PSA公式認定代理店として、FedExアメリカ直送で安全・確実に鑑定代行を行います。",
+    type: "website",
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@gradingservices",
+    site: "@gradingservices",
+  },
 };
 
 export default function RootLayout({
@@ -23,12 +44,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="ja">
+      <body className={notoSansJP.className}>{children}</body>
     </html>
   );
 }

@@ -14,6 +14,17 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
 - [x] ESLint configuration
 - [x] Memory bank documentation
 - [x] Recipe system for common features
+- [x] Pokemon card grading service landing page (グレサ)
+  - Dark luxury theme with gold accents and animated stars/particles
+  - Hero section with stats, PSA/BGS/CGC service cards
+  - Why grading section with grade visualization
+  - 6-step how-it-works flow
+  - Pricing plans (Economy/Standard/Express)
+  - Supported card genres section
+  - FAQ accordion
+  - Contact/CTA section with LINE and email
+  - Responsive navigation with mobile menu
+  - Noto Sans JP font via next/font/google
 
 ## Current Structure
 

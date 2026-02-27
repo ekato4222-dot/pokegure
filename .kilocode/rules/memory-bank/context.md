@@ -20,11 +20,18 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
   - Why grading section with grade visualization
   - 6-step how-it-works flow
   - Pricing plans (Economy/Standard/Express)
-  - Supported card genres section
   - FAQ accordion
   - Contact/CTA section with LINE and email
   - Responsive navigation with mobile menu
   - Noto Sans JP font via next/font/google
+- [x] Revamped to Pokemon card ONLY specialization
+  - Removed "Supported Card Genres" section (was showing Sports/MTG/Yu-Gi-Oh)
+  - Added "Pokemon Card Types" section (旧裏・初期, SR/SAR/UR, プロモ, スタンダード, 旧裏リバイバル, 海外版)
+  - Updated hero badge and copy to emphasize Pokemon card specialty
+  - Updated FAQ with Pokemon-specific questions (旧裏カード, 枚数制限など)
+  - Updated all service descriptions to reference Pokemon cards specifically
+  - Updated footer tagline to "ポケカ鑑定代行"
+  - Updated layout.tsx keywords with Pokemon-specific SEO terms
 
 ## Current Structure
 

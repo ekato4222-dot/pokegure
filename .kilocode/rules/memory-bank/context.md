@@ -106,3 +106,4 @@ export async function GET() {
 | Date | Changes |
 |------|---------|
 | Initial | Template created with base setup |
+| 2026-02-27 | Revamped UI to futuristic light gradient theme (aurora blobs, glass morphism, indigo/violet/pink palette) |

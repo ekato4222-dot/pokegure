@@ -4,46 +4,26 @@ import { useState, useEffect } from "react";
 
 // Pre-computed static values to avoid Math.random() in render
 const STARS = [
-  { id: 0, left: 5.2, top: 12.4, delay: 0.3, size: 3, opacity: 0.5 },
-  { id: 1, left: 15.7, top: 34.1, delay: 1.2, size: 2, opacity: 0.4 },
-  { id: 2, left: 25.3, top: 67.8, delay: 2.1, size: 4, opacity: 0.6 },
-  { id: 3, left: 35.9, top: 8.5, delay: 0.7, size: 3, opacity: 0.5 },
-  { id: 4, left: 45.1, top: 45.2, delay: 1.8, size: 3, opacity: 0.7 },
-  { id: 5, left: 55.6, top: 78.3, delay: 0.4, size: 2, opacity: 0.3 },
-  { id: 6, left: 65.2, top: 23.7, delay: 2.5, size: 4, opacity: 0.5 },
-  { id: 7, left: 75.8, top: 56.9, delay: 1.1, size: 3, opacity: 0.6 },
-  { id: 8, left: 85.4, top: 89.1, delay: 0.9, size: 2, opacity: 0.4 },
-  { id: 9, left: 92.1, top: 15.6, delay: 2.3, size: 3, opacity: 0.5 },
-  { id: 10, left: 8.7, top: 42.3, delay: 1.5, size: 3, opacity: 0.4 },
-  { id: 11, left: 18.3, top: 71.5, delay: 0.6, size: 2, opacity: 0.3 },
-  { id: 12, left: 28.9, top: 19.8, delay: 2.8, size: 4, opacity: 0.5 },
-  { id: 13, left: 38.5, top: 84.2, delay: 1.3, size: 3, opacity: 0.6 },
-  { id: 14, left: 48.1, top: 31.6, delay: 0.2, size: 2, opacity: 0.4 },
-  { id: 15, left: 58.7, top: 62.9, delay: 1.9, size: 3, opacity: 0.5 },
-  { id: 16, left: 68.3, top: 7.3, delay: 0.8, size: 3, opacity: 0.4 },
-  { id: 17, left: 78.9, top: 48.7, delay: 2.4, size: 2, opacity: 0.3 },
-  { id: 18, left: 88.5, top: 73.1, delay: 1.6, size: 4, opacity: 0.5 },
-  { id: 19, left: 3.1, top: 95.4, delay: 0.5, size: 3, opacity: 0.6 },
-  { id: 20, left: 12.7, top: 28.7, delay: 2.2, size: 2, opacity: 0.4 },
-  { id: 21, left: 22.3, top: 59.1, delay: 1.0, size: 2, opacity: 0.5 },
-  { id: 22, left: 32.9, top: 3.5, delay: 2.7, size: 4, opacity: 0.4 },
-  { id: 23, left: 42.5, top: 37.8, delay: 0.1, size: 3, opacity: 0.3 },
-  { id: 24, left: 52.1, top: 68.2, delay: 1.7, size: 3, opacity: 0.5 },
-  { id: 25, left: 62.7, top: 14.6, delay: 0.3, size: 2, opacity: 0.6 },
-  { id: 26, left: 72.3, top: 51.9, delay: 2.0, size: 3, opacity: 0.4 },
-  { id: 27, left: 82.9, top: 82.3, delay: 1.4, size: 3, opacity: 0.5 },
-  { id: 28, left: 93.5, top: 26.7, delay: 0.6, size: 2, opacity: 0.4 },
-  { id: 29, left: 7.1, top: 57.1, delay: 2.9, size: 4, opacity: 0.3 },
-  { id: 30, left: 16.7, top: 88.4, delay: 1.1, size: 3, opacity: 0.5 },
-  { id: 31, left: 26.3, top: 11.8, delay: 0.4, size: 2, opacity: 0.6 },
-  { id: 32, left: 36.9, top: 43.2, delay: 2.6, size: 2, opacity: 0.4 },
-  { id: 33, left: 46.5, top: 74.5, delay: 1.3, size: 4, opacity: 0.5 },
-  { id: 34, left: 56.1, top: 21.9, delay: 0.7, size: 3, opacity: 0.4 },
-  { id: 35, left: 66.7, top: 53.3, delay: 2.1, size: 3, opacity: 0.3 },
-  { id: 36, left: 76.3, top: 6.7, delay: 1.5, size: 2, opacity: 0.5 },
-  { id: 37, left: 86.9, top: 38.1, delay: 0.2, size: 3, opacity: 0.6 },
-  { id: 38, left: 97.5, top: 69.4, delay: 2.3, size: 3, opacity: 0.4 },
-  { id: 39, left: 4.1, top: 17.8, delay: 1.8, size: 2, opacity: 0.5 },
+  { id: 0, left: 5.2, top: 12.4, delay: 0.3, size: 3, opacity: 0.3 },
+  { id: 1, left: 15.7, top: 34.1, delay: 1.2, size: 2, opacity: 0.25 },
+  { id: 2, left: 25.3, top: 67.8, delay: 2.1, size: 4, opacity: 0.35 },
+  { id: 3, left: 35.9, top: 8.5, delay: 0.7, size: 3, opacity: 0.3 },
+  { id: 4, left: 45.1, top: 45.2, delay: 1.8, size: 3, opacity: 0.4 },
+  { id: 5, left: 55.6, top: 78.3, delay: 0.4, size: 2, opacity: 0.2 },
+  { id: 6, left: 65.2, top: 23.7, delay: 2.5, size: 4, opacity: 0.3 },
+  { id: 7, left: 75.8, top: 56.9, delay: 1.1, size: 3, opacity: 0.35 },
+  { id: 8, left: 85.4, top: 89.1, delay: 0.9, size: 2, opacity: 0.25 },
+  { id: 9, left: 92.1, top: 15.6, delay: 2.3, size: 3, opacity: 0.3 },
+  { id: 10, left: 8.7, top: 42.3, delay: 1.5, size: 3, opacity: 0.25 },
+  { id: 11, left: 18.3, top: 71.5, delay: 0.6, size: 2, opacity: 0.2 },
+  { id: 12, left: 28.9, top: 19.8, delay: 2.8, size: 4, opacity: 0.3 },
+  { id: 13, left: 38.5, top: 84.2, delay: 1.3, size: 3, opacity: 0.35 },
+  { id: 14, left: 48.1, top: 31.6, delay: 0.2, size: 2, opacity: 0.25 },
+  { id: 15, left: 58.7, top: 62.9, delay: 1.9, size: 3, opacity: 0.3 },
+  { id: 16, left: 68.3, top: 7.3, delay: 0.8, size: 3, opacity: 0.25 },
+  { id: 17, left: 78.9, top: 48.7, delay: 2.4, size: 2, opacity: 0.2 },
+  { id: 18, left: 88.5, top: 73.1, delay: 1.6, size: 4, opacity: 0.3 },
+  { id: 19, left: 3.1, top: 95.4, delay: 0.5, size: 3, opacity: 0.35 },
 ];
 
 const PARTICLES = [
@@ -53,8 +33,6 @@ const PARTICLES = [
   { id: 3, left: 35.9, size: 5, duration: 16, delay: 9, emoji: "💫" },
   { id: 4, left: 45.1, size: 9, duration: 20, delay: 4, emoji: "✨" },
   { id: 5, left: 55.6, size: 7, duration: 12, delay: 6, emoji: "⭐" },
-  { id: 6, left: 65.2, size: 11, duration: 24, delay: 3, emoji: "🌟" },
-  { id: 7, left: 75.8, size: 6, duration: 15, delay: 8, emoji: "💫" },
 ];
 
 export default function Home() {
@@ -117,7 +95,7 @@ export default function Home() {
       name: "BGS鑑定",
       subtitle: "Beckett Grading Services",
       color: "bgs-grade",
-      accentColor: "#8b5cf6",
+      accentColor: "#7c3aed",
       description: "センタリング・表面・角・縁の4項目を個別評価するサブグレード制度が特徴。コレクターに人気の詳細な評価システムです。",
       features: ["4項目サブグレード", "ブラックラベル（10/10/10/10）", "詳細なコンディション評価", "プレミアムケース"],
       badge: "BGS",
@@ -126,7 +104,7 @@ export default function Home() {
       name: "CGC鑑定",
       subtitle: "Certified Guaranty Company",
       color: "cgc-grade",
-      accentColor: "#10b981",
+      accentColor: "#059669",
       description: "競争力のある価格と高品質なサービスで急成長中の鑑定機関。ポケカコレクターにも注目されています。",
       features: ["コスパ優秀", "急成長の認知度", "高品質ケース", "ポケカ対応実績多数"],
       badge: "CGC",
@@ -216,49 +194,14 @@ export default function Home() {
     { name: "旧裏・初期カード", color: "#6366f1", desc: "第1弾〜旧裏面カード" },
     { name: "SR・SAR・UR", color: "#ec4899", desc: "スペシャルレアリティ" },
     { name: "プロモカード", color: "#06b6d4", desc: "非売品・限定プロモ" },
-    { name: "スタンダード", color: "#10b981", desc: "現行レギュレーション" },
-    { name: "旧裏リバイバル", color: "#8b5cf6", desc: "復刻・リメイクカード" },
-    { name: "海外版ポケカ", color: "#f59e0b", desc: "英語版・海外限定版" },
+    { name: "スタンダード", color: "#059669", desc: "現行レギュレーション" },
+    { name: "旧裏リバイバル", color: "#7c3aed", desc: "復刻・リメイクカード" },
+    { name: "海外版ポケカ", color: "#d97706", desc: "英語版・海外限定版" },
   ];
 
   return (
-    <div className="relative min-h-screen" style={{ background: "linear-gradient(135deg, #e8eeff 0%, #f0e8ff 30%, #ffe8f5 60%, #e8f5ff 100%)", backgroundAttachment: "fixed" }}>
-      {/* Aurora background blobs */}
-      <div
-        className="aurora-blob"
-        style={{
-          width: "600px",
-          height: "600px",
-          background: "radial-gradient(circle, rgba(110, 231, 247, 0.5) 0%, rgba(167, 139, 250, 0.3) 50%, transparent 70%)",
-          top: "10%",
-          left: "5%",
-          animation: "aurora 15s ease-in-out infinite",
-        }}
-      />
-      <div
-        className="aurora-blob"
-        style={{
-          width: "500px",
-          height: "500px",
-          background: "radial-gradient(circle, rgba(249, 168, 212, 0.5) 0%, rgba(167, 139, 250, 0.3) 50%, transparent 70%)",
-          top: "40%",
-          right: "5%",
-          animation: "aurora 18s ease-in-out infinite reverse",
-        }}
-      />
-      <div
-        className="aurora-blob"
-        style={{
-          width: "400px",
-          height: "400px",
-          background: "radial-gradient(circle, rgba(147, 197, 253, 0.5) 0%, rgba(110, 231, 247, 0.3) 50%, transparent 70%)",
-          bottom: "10%",
-          left: "30%",
-          animation: "aurora 12s ease-in-out infinite",
-        }}
-      />
-
-      {/* Stars background */}
+    <div className="relative min-h-screen" style={{ background: "#ffffff" }}>
+      {/* Subtle stars background */}
       <div className="stars-bg">
         {STARS.map((star) => (
           <div
@@ -296,13 +239,11 @@ export default function Home() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: isScrolled
-            ? "rgba(248, 250, 255, 0.85)"
-            : "rgba(248, 250, 255, 0.6)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: isScrolled ? "1px solid rgba(167, 139, 250, 0.25)" : "1px solid rgba(167, 139, 250, 0.1)",
-          boxShadow: isScrolled ? "0 4px 30px rgba(99, 102, 241, 0.08)" : "none",
+          background: isScrolled ? "rgba(255, 255, 255, 0.97)" : "rgba(255, 255, 255, 0.92)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid #e5e7eb",
+          boxShadow: isScrolled ? "0 2px 12px rgba(0, 0, 0, 0.06)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -312,16 +253,16 @@ export default function Home() {
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black"
                 style={{
-                  background: "linear-gradient(135deg, #6366f1, #a78bfa)",
+                  background: "linear-gradient(135deg, #6366f1, #7c3aed)",
                   color: "#fff",
-                  boxShadow: "0 0 15px rgba(99, 102, 241, 0.35)",
+                  boxShadow: "0 4px 12px rgba(99, 102, 241, 0.35)",
                 }}
               >
                 G
               </div>
               <div>
                 <div className="font-black text-lg leading-none gradient-text">ポケグレ</div>
-                <div className="text-xs leading-none" style={{ color: "var(--text-muted)" }}>ポケカ鑑定代行</div>
+                <div className="text-xs leading-none" style={{ color: "#9ca3af" }}>ポケカ鑑定代行</div>
               </div>
             </div>
 
@@ -339,12 +280,12 @@ export default function Home() {
             {/* Mobile menu button */}
             <button
               className="md:hidden p-2"
-              style={{ color: "var(--text-dark)" }}
+              style={{ color: "#374151" }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <div className="w-6 h-0.5 mb-1.5 transition-all" style={{ background: "var(--text-dark)", transform: mobileMenuOpen ? "rotate(45deg) translate(4px, 4px)" : "none" }} />
-              <div className="w-6 h-0.5 mb-1.5 transition-all" style={{ background: "var(--text-dark)", opacity: mobileMenuOpen ? 0 : 1 }} />
-              <div className="w-6 h-0.5 transition-all" style={{ background: "var(--text-dark)", transform: mobileMenuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none" }} />
+              <div className="w-6 h-0.5 mb-1.5 transition-all" style={{ background: "#374151", transform: mobileMenuOpen ? "rotate(45deg) translate(4px, 4px)" : "none" }} />
+              <div className="w-6 h-0.5 mb-1.5 transition-all" style={{ background: "#374151", opacity: mobileMenuOpen ? 0 : 1 }} />
+              <div className="w-6 h-0.5 transition-all" style={{ background: "#374151", transform: mobileMenuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none" }} />
             </button>
           </div>
 
@@ -352,7 +293,7 @@ export default function Home() {
           {mobileMenuOpen && (
             <div
               className="md:hidden py-4 border-t"
-              style={{ borderColor: "rgba(167, 139, 250, 0.2)" }}
+              style={{ borderColor: "#e5e7eb" }}
             >
               <div className="flex flex-col gap-4">
                 <a href="#services" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>鑑定機関</a>
@@ -370,8 +311,8 @@ export default function Home() {
 
       {/* Info bar */}
       <div className="info-bar relative z-10 pt-16 md:pt-20">
-        <div className="max-w-7xl mx-auto px-4 py-2">
-          <p className="text-center text-xs md:text-sm" style={{ color: "#6366f1" }}>
+        <div className="max-w-7xl mx-auto px-4 py-2.5">
+          <p className="text-center text-xs md:text-sm font-medium" style={{ color: "#1d4ed8" }}>
             🔔 <strong>【最新情報】</strong> 次回PSA・BGS締め切り：3月4日(水) ／ 発送予定：3月11日(水)
           </p>
         </div>
@@ -401,9 +342,9 @@ export default function Home() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-6"
             style={{
-              background: "rgba(99, 102, 241, 0.08)",
-              border: "1px solid rgba(99, 102, 241, 0.25)",
-              color: "#6366f1",
+              background: "#eff6ff",
+              border: "1px solid #bfdbfe",
+              color: "#1d4ed8",
             }}
           >
             <span>🎴</span>
@@ -412,7 +353,7 @@ export default function Home() {
           </div>
 
           {/* Main heading */}
-          <h1 className="font-black leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "var(--text-dark)" }}>
+          <h1 className="font-black leading-tight mb-6" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "#111827" }}>
             <span className="gradient-text-pokemon">ポケカ</span>
             <span>の価値を</span>
             <br />
@@ -420,7 +361,7 @@ export default function Home() {
             <span>で証明する</span>
           </h1>
 
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed" style={{ color: "var(--text-muted)" }}>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed" style={{ color: "#4b5563" }}>
             ポケモンカード専門の鑑定代行サービス。<br />
             PSA・BGS・CGCへFedExアメリカ直送で、<br className="hidden md:block" />
             あなたの大切なポケカを安全・確実に鑑定。
@@ -431,11 +372,11 @@ export default function Home() {
             {["旧裏・初期カード", "SR・SAR・UR", "プロモカード", "海外版ポケカ"].map((type) => (
               <span
                 key={type}
-                className="text-xs px-3 py-1 rounded-full font-medium"
+                className="text-xs px-3 py-1.5 rounded-full font-semibold"
                 style={{
-                  background: "rgba(99, 102, 241, 0.08)",
-                  border: "1px solid rgba(99, 102, 241, 0.2)",
-                  color: "#6366f1",
+                  background: "#f3f4f6",
+                  border: "1px solid #d1d5db",
+                  color: "#374151",
                 }}
               >
                 {type}
@@ -460,7 +401,7 @@ export default function Home() {
                 className="glass-card rounded-2xl p-4"
               >
                 <div className="font-black text-2xl md:text-3xl gradient-text">{stat.value}</div>
-                <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{stat.label}</div>
+                <div className="text-sm mt-1 font-medium" style={{ color: "#6b7280" }}>{stat.label}</div>
               </div>
             ))}
           </div>
@@ -470,26 +411,26 @@ export default function Home() {
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
           <div
             className="w-6 h-10 rounded-full border-2 flex items-start justify-center pt-2"
-            style={{ borderColor: "rgba(99, 102, 241, 0.35)" }}
+            style={{ borderColor: "#d1d5db" }}
           >
             <div
               className="w-1 h-3 rounded-full"
-              style={{ background: "linear-gradient(180deg, #6366f1, #a78bfa)", animation: "float 1.5s ease-in-out infinite" }}
+              style={{ background: "linear-gradient(180deg, #6366f1, #7c3aed)", animation: "float 1.5s ease-in-out infinite" }}
             />
           </div>
         </div>
       </section>
 
       {/* Pokemon Card Types Section */}
-      <section className="relative z-10 py-20">
+      <section className="relative z-10 py-20 section-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 tracking-wider"
               style={{
-                background: "rgba(99, 102, 241, 0.08)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                color: "#6366f1",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                color: "#1d4ed8",
               }}
             >
               POKEMON CARDS
@@ -507,15 +448,14 @@ export default function Home() {
               <div
                 key={i}
                 className="glass-card rounded-2xl p-5 flex items-center gap-4 group hover:-translate-y-1 transition-transform duration-300"
-                style={{ borderColor: `${type.color}30` }}
               >
                 <div
                   className="w-3 h-12 rounded-full flex-shrink-0"
-                  style={{ background: `linear-gradient(180deg, ${type.color}, ${type.color}60)` }}
+                  style={{ background: `linear-gradient(180deg, ${type.color}, ${type.color}80)` }}
                 />
                 <div>
-                  <div className="font-black text-sm md:text-base" style={{ color: "var(--text-dark)" }}>{type.name}</div>
-                  <div className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>{type.desc}</div>
+                  <div className="font-bold text-sm md:text-base" style={{ color: "#111827" }}>{type.name}</div>
+                  <div className="text-xs mt-0.5 font-medium" style={{ color: "#6b7280" }}>{type.desc}</div>
                 </div>
               </div>
             ))}
@@ -524,13 +464,13 @@ export default function Home() {
           <div
             className="mt-8 rounded-2xl p-5 text-center"
             style={{
-              background: "rgba(99, 102, 241, 0.05)",
-              border: "1px solid rgba(99, 102, 241, 0.15)",
+              background: "#eff6ff",
+              border: "1px solid #bfdbfe",
             }}
           >
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              <span className="gradient-text font-bold">ポケモンカード専門</span>だからこそ、カードの価値・状態を正確に把握。
-              希少カードの取り扱い実績も豊富です。
+            <p className="text-sm font-medium" style={{ color: "#1e40af" }}>
+              <span className="gradient-text font-bold">ポケモンカード専門</span>
+              <span style={{ color: "#1e40af" }}>だからこそ、カードの価値・状態を正確に把握。希少カードの取り扱い実績も豊富です。</span>
             </p>
           </div>
         </div>
@@ -541,11 +481,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 tracking-wider"
               style={{
-                background: "rgba(99, 102, 241, 0.08)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                color: "#6366f1",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                color: "#1d4ed8",
               }}
             >
               GRADING SERVICES
@@ -564,15 +504,14 @@ export default function Home() {
                 key={i}
                 className={`${service.color} rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 cursor-default`}
                 style={{
-                  boxShadow: `0 0 30px ${service.accentColor}15`,
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                   transition: "all 0.3s ease",
-                  backdropFilter: "blur(12px)",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px ${service.accentColor}30, 0 0 40px ${service.accentColor}15`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 16px 40px ${service.accentColor}20`;
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${service.accentColor}15`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.06)";
                 }}
               >
                 {/* Badge */}
@@ -580,24 +519,24 @@ export default function Home() {
                   className="inline-flex items-center justify-center w-16 h-16 rounded-2xl font-black text-xl mb-6"
                   style={{
                     background: `${service.accentColor}15`,
-                    border: `2px solid ${service.accentColor}50`,
+                    border: `2px solid ${service.accentColor}40`,
                     color: service.accentColor,
                   }}
                 >
                   {service.badge}
                 </div>
 
-                <h3 className="text-2xl font-black mb-1" style={{ color: "var(--text-dark)" }}>{service.name}</h3>
-                <p className="text-xs mb-4" style={{ color: service.accentColor }}>
+                <h3 className="text-2xl font-black mb-1" style={{ color: "#111827" }}>{service.name}</h3>
+                <p className="text-xs font-semibold mb-4" style={{ color: service.accentColor }}>
                   {service.subtitle}
                 </p>
-                <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-muted)" }}>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "#4b5563" }}>
                   {service.description}
                 </p>
 
                 <ul className="space-y-2">
                   {service.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-muted)" }}>
+                    <li key={j} className="flex items-center gap-2 text-sm font-medium" style={{ color: "#374151" }}>
                       <span style={{ color: service.accentColor }}>✓</span>
                       {f}
                     </li>
@@ -610,29 +549,24 @@ export default function Home() {
       </section>
 
       {/* Why Grading Section */}
-      <section
-        className="relative z-10 py-24"
-        style={{
-          background: "linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03), transparent)",
-        }}
-      >
+      <section className="relative z-10 py-24 section-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <div
-                className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 tracking-wider"
                 style={{
-                  background: "rgba(99, 102, 241, 0.08)",
-                  border: "1px solid rgba(99, 102, 241, 0.2)",
-                  color: "#6366f1",
+                  background: "#eff6ff",
+                  border: "1px solid #bfdbfe",
+                  color: "#1d4ed8",
                 }}
               >
                 WHY GRADING?
               </div>
-              <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight" style={{ color: "var(--text-dark)" }}>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight" style={{ color: "#111827" }}>
                 なぜポケカに<br /><span className="gradient-text">グレーディング</span>が<br />必要なのか？
               </h2>
-              <p className="leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
+              <p className="leading-relaxed mb-8" style={{ color: "#4b5563" }}>
                 ポケモンカードの価値は、そのコンディションによって大きく左右されます。
                 グレーディングを行うことで、カードの真贋と状態が第三者機関によって証明され、
                 売買時の信頼性が格段に向上します。
@@ -648,8 +582,8 @@ export default function Home() {
                   <div key={i} className="flex items-start gap-4 glass-card rounded-2xl p-4">
                     <span className="text-2xl">{item.icon}</span>
                     <div>
-                      <div className="font-bold mb-1" style={{ color: "var(--text-dark)" }}>{item.title}</div>
-                      <div className="text-sm" style={{ color: "var(--text-muted)" }}>{item.desc}</div>
+                      <div className="font-bold mb-1" style={{ color: "#111827" }}>{item.title}</div>
+                      <div className="text-sm" style={{ color: "#4b5563" }}>{item.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -661,14 +595,13 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { grade: "10", label: "Gem Mint", color: "#6366f1", desc: "完璧な状態" },
-                  { grade: "9", label: "Mint", color: "#8b5cf6", desc: "ほぼ完璧" },
-                  { grade: "8", label: "NM-MT", color: "#06b6d4", desc: "非常に良い" },
-                  { grade: "7", label: "Near Mint", color: "#10b981", desc: "良い状態" },
+                  { grade: "9", label: "Mint", color: "#7c3aed", desc: "ほぼ完璧" },
+                  { grade: "8", label: "NM-MT", color: "#0891b2", desc: "非常に良い" },
+                  { grade: "7", label: "Near Mint", color: "#059669", desc: "良い状態" },
                 ].map((g, i) => (
                   <div
                     key={i}
                     className="glass-card rounded-2xl p-6 text-center"
-                    style={{ borderColor: `${g.color}30` }}
                   >
                     <div
                       className="text-5xl font-black mb-2"
@@ -676,18 +609,21 @@ export default function Home() {
                     >
                       {g.grade}
                     </div>
-                    <div className="font-bold text-sm" style={{ color: "var(--text-dark)" }}>{g.label}</div>
-                    <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{g.desc}</div>
+                    <div className="font-bold text-sm" style={{ color: "#111827" }}>{g.label}</div>
+                    <div className="text-xs mt-1 font-medium" style={{ color: "#6b7280" }}>{g.desc}</div>
                   </div>
                 ))}
               </div>
               <div
-                className="mt-4 glass-card rounded-2xl p-4 text-center"
-                style={{ borderColor: "rgba(99, 102, 241, 0.2)" }}
+                className="mt-4 rounded-2xl p-4 text-center"
+                style={{
+                  background: "#f3f4f6",
+                  border: "1px solid #e5e7eb",
+                }}
               >
-                <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                  <span className="gradient-text font-bold">PSA・BGS・CGC</span> は10段階でポケカを評価。<br />
-                  グレードが高いほど、市場価値が大幅に上昇します。
+                <p className="text-sm font-medium" style={{ color: "#374151" }}>
+                  <span className="gradient-text font-bold">PSA・BGS・CGC</span>
+                  <span style={{ color: "#374151" }}> は10段階でポケカを評価。グレードが高いほど、市場価値が大幅に上昇します。</span>
                 </p>
               </div>
             </div>
@@ -700,11 +636,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 tracking-wider"
               style={{
-                background: "rgba(99, 102, 241, 0.08)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                color: "#6366f1",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                color: "#1d4ed8",
               }}
             >
               HOW IT WORKS
@@ -722,7 +658,7 @@ export default function Home() {
               <div key={i} className="glass-card rounded-3xl p-6 relative overflow-hidden group">
                 {/* Background number */}
                 <div
-                  className="absolute top-4 right-4 text-8xl font-black opacity-5 group-hover:opacity-10 transition-opacity"
+                  className="absolute top-4 right-4 text-8xl font-black opacity-[0.04] group-hover:opacity-[0.07] transition-opacity"
                   style={{ color: "#6366f1" }}
                 >
                   {step.num}
@@ -730,19 +666,19 @@ export default function Home() {
 
                 <div className="text-4xl mb-4">{step.icon}</div>
                 <div
-                  className="text-xs font-bold mb-2"
+                  className="text-xs font-bold mb-2 tracking-wider"
                   style={{ color: "#6366f1" }}
                 >
                   STEP {step.num}
                 </div>
-                <h3 className="text-xl font-black mb-3" style={{ color: "var(--text-dark)" }}>{step.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{step.desc}</p>
+                <h3 className="text-xl font-black mb-3" style={{ color: "#111827" }}>{step.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: "#4b5563" }}>{step.desc}</p>
 
                 {/* Connector arrow */}
                 {i < steps.length - 1 && (
                   <div
                     className="hidden lg:block absolute -right-3 top-1/2 transform -translate-y-1/2 text-xl z-10"
-                    style={{ color: "#a78bfa" }}
+                    style={{ color: "#9ca3af" }}
                   >
                     →
                   </div>
@@ -762,19 +698,16 @@ export default function Home() {
       {/* Pricing Section */}
       <section
         id="pricing"
-        className="relative z-10 py-24"
-        style={{
-          background: "linear-gradient(180deg, transparent, rgba(167, 139, 250, 0.05), transparent)",
-        }}
+        className="relative z-10 py-24 section-alt"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 tracking-wider"
               style={{
-                background: "rgba(99, 102, 241, 0.08)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                color: "#6366f1",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                color: "#1d4ed8",
               }}
             >
               PRICING
@@ -791,15 +724,15 @@ export default function Home() {
             {plans.map((plan, i) => (
               <div key={i} className={`price-card ${plan.featured ? "featured" : ""}`}>
                 <div className="mb-6">
-                  <div className="text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>{plan.nameEn}</div>
-                  <h3 className="text-2xl font-black" style={{ color: "var(--text-dark)" }}>{plan.name}</h3>
-                  <p className="text-sm mt-2" style={{ color: "var(--text-muted)" }}>{plan.description}</p>
+                  <div className="text-xs font-bold mb-1 tracking-wider" style={{ color: "#9ca3af" }}>{plan.nameEn}</div>
+                  <h3 className="text-2xl font-black" style={{ color: "#111827" }}>{plan.name}</h3>
+                  <p className="text-sm mt-2" style={{ color: "#4b5563" }}>{plan.description}</p>
                 </div>
 
                 <div className="mb-6">
                   <div className="flex items-end gap-1">
                     <span className="text-4xl font-black gradient-text">¥{plan.price}</span>
-                    <span className="text-sm mb-1" style={{ color: "var(--text-muted)" }}>{plan.unit}</span>
+                    <span className="text-sm mb-1 font-medium" style={{ color: "#6b7280" }}>{plan.unit}</span>
                   </div>
                   <div
                     className="text-sm mt-2 font-semibold"
@@ -811,8 +744,8 @@ export default function Home() {
 
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm" style={{ color: "var(--text-muted)" }}>
-                      <span className="gradient-text">✓</span>
+                    <li key={j} className="flex items-center gap-2 text-sm font-medium" style={{ color: "#374151" }}>
+                      <span style={{ color: "#6366f1", fontWeight: "bold" }}>✓</span>
                       {f}
                     </li>
                   ))}
@@ -837,8 +770,8 @@ export default function Home() {
             ].map((item, i) => (
               <div key={i} className="glass-card rounded-2xl p-4 text-center">
                 <div className="text-2xl mb-2">{item.icon}</div>
-                <div className="font-bold text-sm mb-1" style={{ color: "var(--text-dark)" }}>{item.title}</div>
-                <div className="text-xs" style={{ color: "var(--text-muted)" }}>{item.desc}</div>
+                <div className="font-bold text-sm mb-1" style={{ color: "#111827" }}>{item.title}</div>
+                <div className="text-xs font-medium" style={{ color: "#6b7280" }}>{item.desc}</div>
               </div>
             ))}
           </div>
@@ -849,18 +782,15 @@ export default function Home() {
       <section
         id="faq"
         className="relative z-10 py-24"
-        style={{
-          background: "linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.03), transparent)",
-        }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+              className="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4 tracking-wider"
               style={{
-                background: "rgba(99, 102, 241, 0.08)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                color: "#6366f1",
+                background: "#eff6ff",
+                border: "1px solid #bfdbfe",
+                color: "#1d4ed8",
               }}
             >
               FAQ
@@ -874,13 +804,17 @@ export default function Home() {
             {faqs.map((faq, i) => (
               <div
                 key={i}
-                className="glass-card rounded-2xl overflow-hidden"
-                style={{ borderColor: openFaq === i ? "rgba(99, 102, 241, 0.4)" : "rgba(167, 139, 250, 0.15)" }}
+                className="rounded-2xl overflow-hidden transition-all duration-200"
+                style={{
+                  background: "#ffffff",
+                  border: openFaq === i ? "1.5px solid #6366f1" : "1.5px solid #e5e7eb",
+                  boxShadow: openFaq === i ? "0 4px 16px rgba(99, 102, 241, 0.1)" : "0 1px 3px rgba(0,0,0,0.05)",
+                }}
               >
                 <button
                   className="faq-question w-full text-left px-6"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  style={{ color: openFaq === i ? "#6366f1" : "var(--text-dark)" }}
+                  style={{ color: openFaq === i ? "#6366f1" : "#111827" }}
                 >
                   <span className="flex items-start gap-3">
                     <span
@@ -889,12 +823,12 @@ export default function Home() {
                     >
                       Q.
                     </span>
-                    <span>{faq.q}</span>
+                    <span className="font-semibold">{faq.q}</span>
                   </span>
                   <span
-                    className="text-xl flex-shrink-0 transition-transform duration-300"
+                    className="text-xl flex-shrink-0 transition-transform duration-300 font-bold"
                     style={{
-                      color: "#a78bfa",
+                      color: "#9ca3af",
                       transform: openFaq === i ? "rotate(45deg)" : "none",
                     }}
                   >
@@ -906,7 +840,7 @@ export default function Home() {
                   <div className="px-6 pb-5">
                     <div
                       className="pt-4 border-t"
-                      style={{ borderColor: "rgba(167, 139, 250, 0.15)" }}
+                      style={{ borderColor: "#f3f4f6" }}
                     >
                       <div className="flex items-start gap-3">
                         <span
@@ -915,7 +849,7 @@ export default function Home() {
                         >
                           A.
                         </span>
-                        <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{faq.a}</p>
+                        <p className="text-sm leading-relaxed" style={{ color: "#374151" }}>{faq.a}</p>
                       </div>
                     </div>
                   </div>
@@ -927,36 +861,35 @@ export default function Home() {
       </section>
 
       {/* Contact / CTA Section */}
-      <section id="contact" className="relative z-10 py-24">
+      <section id="contact" className="relative z-10 py-24 section-alt">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="rounded-3xl p-12 text-center relative overflow-hidden"
             style={{
-              background: "linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(167, 139, 250, 0.1), rgba(249, 168, 212, 0.08))",
-              border: "1px solid rgba(167, 139, 250, 0.25)",
-              backdropFilter: "blur(20px)",
+              background: "linear-gradient(135deg, #6366f1 0%, #7c3aed 50%, #6366f1 100%)",
+              boxShadow: "0 20px 60px rgba(99, 102, 241, 0.35)",
             }}
           >
             {/* Decorative elements */}
             <div
-              className="absolute top-0 left-0 w-full h-full opacity-30"
+              className="absolute top-0 left-0 w-full h-full opacity-20"
               style={{
-                background: "radial-gradient(circle at 30% 50%, rgba(110, 231, 247, 0.3) 0%, transparent 60%)",
+                background: "radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 60%)",
               }}
             />
             <div
-              className="absolute top-0 right-0 w-full h-full opacity-30"
+              className="absolute top-0 right-0 w-full h-full opacity-20"
               style={{
-                background: "radial-gradient(circle at 70% 50%, rgba(167, 139, 250, 0.3) 0%, transparent 60%)",
+                background: "radial-gradient(circle at 80% 50%, rgba(255,255,255,0.3) 0%, transparent 60%)",
               }}
             />
 
             <div className="relative z-10">
               <div className="text-5xl mb-6">🎴</div>
-              <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: "var(--text-dark)" }}>
-                今すぐ<span className="gradient-text">ポケカ鑑定</span>を始めよう
+              <h2 className="text-4xl md:text-5xl font-black mb-4" style={{ color: "#ffffff" }}>
+                今すぐ<span style={{ color: "#fde68a" }}>ポケカ鑑定</span>を始めよう
               </h2>
-              <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: "var(--text-muted)" }}>
+              <p className="text-lg mb-8 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.85)" }}>
                 あなたの大切なポケモンカードの価値を、世界基準で証明しましょう。
                 LINEまたはメールでお気軽にお問い合わせください。
               </p>
@@ -964,13 +897,23 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
                 <a
                   href="https://lin.ee/40XcCAh"
-                  className="btn-primary text-base px-8 py-4 flex items-center justify-center gap-2"
+                  className="text-base px-8 py-4 flex items-center justify-center gap-2 rounded-full font-bold transition-all duration-200 hover:-translate-y-1"
+                  style={{
+                    background: "#ffffff",
+                    color: "#6366f1",
+                    boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
+                  }}
                 >
                   <span>💬</span> LINEで相談する
                 </a>
                 <a
                   href="mailto:info@gradingservices.jp"
-                  className="btn-secondary text-base px-8 py-4 flex items-center justify-center gap-2"
+                  className="text-base px-8 py-4 flex items-center justify-center gap-2 rounded-full font-bold transition-all duration-200 hover:-translate-y-1"
+                  style={{
+                    background: "rgba(255,255,255,0.15)",
+                    color: "#ffffff",
+                    border: "2px solid rgba(255,255,255,0.5)",
+                  }}
                 >
                   <span>✉️</span> メールで問い合わせ
                 </a>
@@ -986,11 +929,11 @@ export default function Home() {
                   <div
                     key={i}
                     className="rounded-xl p-3"
-                    style={{ background: "rgba(255, 255, 255, 0.5)" }}
+                    style={{ background: "rgba(255, 255, 255, 0.15)" }}
                   >
                     <div className="text-lg mb-1">{info.icon}</div>
-                    <div className="text-xs" style={{ color: "var(--text-muted)" }}>{info.label}</div>
-                    <div className="text-xs font-semibold mt-0.5" style={{ color: "var(--text-dark)" }}>{info.value}</div>
+                    <div className="text-xs" style={{ color: "rgba(255,255,255,0.7)" }}>{info.label}</div>
+                    <div className="text-xs font-semibold mt-0.5" style={{ color: "#ffffff" }}>{info.value}</div>
                   </div>
                 ))}
               </div>
@@ -1003,9 +946,8 @@ export default function Home() {
       <footer
         className="relative z-10 py-12 border-t"
         style={{
-          borderColor: "rgba(167, 139, 250, 0.15)",
-          background: "rgba(255, 255, 255, 0.4)",
-          backdropFilter: "blur(12px)",
+          borderColor: "#e5e7eb",
+          background: "#f9fafb",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1016,7 +958,7 @@ export default function Home() {
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center text-lg font-black"
                   style={{
-                    background: "linear-gradient(135deg, #6366f1, #a78bfa)",
+                    background: "linear-gradient(135deg, #6366f1, #7c3aed)",
                     color: "#fff",
                   }}
                 >
@@ -1024,21 +966,21 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="font-black text-lg leading-none gradient-text">ポケグレ</div>
-                  <div className="text-xs leading-none" style={{ color: "var(--text-muted)" }}>ポケカ鑑定代行</div>
+                  <div className="text-xs leading-none" style={{ color: "#9ca3af" }}>ポケカ鑑定代行</div>
                 </div>
               </div>
-              <p className="text-sm leading-relaxed max-w-xs" style={{ color: "var(--text-muted)" }}>
+              <p className="text-sm leading-relaxed max-w-xs" style={{ color: "#6b7280" }}>
                 ポケモンカード専門の鑑定代行サービス。PSA・BGS・CGCへのFedEx直送で、あなたの大切なポケカを世界基準で鑑定します。
               </p>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="font-bold mb-4 text-sm" style={{ color: "var(--text-dark)" }}>サービス</h4>
+              <h4 className="font-bold mb-4 text-sm" style={{ color: "#111827" }}>サービス</h4>
               <ul className="space-y-2">
                 {["PSA鑑定代行", "BGS鑑定代行", "CGC鑑定代行", "料金プラン", "申込方法"].map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-sm transition-colors hover:text-indigo-500" style={{ color: "var(--text-muted)" }}>
+                    <a href="#" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>
                       {link}
                     </a>
                   </li>
@@ -1047,11 +989,11 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-4 text-sm" style={{ color: "var(--text-dark)" }}>サポート</h4>
+              <h4 className="font-bold mb-4 text-sm" style={{ color: "#111827" }}>サポート</h4>
               <ul className="space-y-2">
                 {["よくある質問", "梱包方法", "お問い合わせ", "プライバシーポリシー", "利用規約"].map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-sm transition-colors hover:text-indigo-500" style={{ color: "var(--text-muted)" }}>
+                    <a href="#" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>
                       {link}
                     </a>
                   </li>
@@ -1062,23 +1004,23 @@ export default function Home() {
 
           <div
             className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4"
-            style={{ borderColor: "rgba(167, 139, 250, 0.1)" }}
+            style={{ borderColor: "#e5e7eb" }}
           >
-            <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+            <p className="text-xs" style={{ color: "#9ca3af" }}>
               © 2024 ポケグレ. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <a
                 href="https://twitter.com/gradingservices"
-                className="text-sm transition-colors hover:text-indigo-500"
-                style={{ color: "var(--text-muted)" }}
+                className="text-sm transition-colors hover:text-indigo-600"
+                style={{ color: "#6b7280" }}
               >
                 Twitter
               </a>
               <a
                 href="https://lin.ee/40XcCAh"
-                className="text-sm transition-colors hover:text-indigo-500"
-                style={{ color: "var(--text-muted)" }}
+                className="text-sm transition-colors hover:text-indigo-600"
+                style={{ color: "#6b7280" }}
               >
                 LINE
               </a>

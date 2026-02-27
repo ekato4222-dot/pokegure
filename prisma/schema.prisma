@@ -21,23 +21,43 @@ model User {
 }
 
 model Order {
-  id                String             @id @default(cuid())
-  userId            String
-  user              User               @relation(fields: [userId], references: [id])
-  plan              String
-  gradingCompany    String
-  cardCount         Int
-  preInspection     Boolean            @default(false)
-  status            String             @default("pending")
-  preInspectionNote String?
-  totalAmount       Int
-  paymentStatus     String             @default("unpaid")
-  paymentMethod     String?
-  adminNote         String?
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  cards             OrderCard[]
-  additionalCharges AdditionalCharge[]
+  id                    String             @id @default(cuid())
+  userId                String
+  user                  User               @relation(fields: [userId], references: [id])
+  plan                  String
+  gradingCompany        String
+  cardCount             Int
+  preInspection         Boolean            @default(false)
+  status                String             @default("受付")
+  preInspectionNote     String?
+  totalAmount           Int
+  paymentStatus         String             @default("unpaid")
+  paymentMethod         String?
+  adminNote             String?
+  inputNo               String?
+  listNo                String?
+  userDisplayName       String?
+  customerName          String?
+  customerPhone         String?
+  memo                  String?
+  preInspectionRequested Boolean?
+  adminFeeCandidate     Int?
+  actualShippingPlan    String?
+  cardName              String?
+  declaredPrice         Int?
+  insuranceFee          Int?
+  totalCardCount        Int?
+  gradingTotalAmount    Int?
+  preInspectionFee      Int?
+  returnShippingFee     Int?
+  totalInvoiceAmount    Int?
+  psaFee                Int?
+  customsShippingFee    Int?
+  estimatedNetProfit    Int?
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  cards                 OrderCard[]
+  additionalCharges     AdditionalCharge[]
 }
 
 model OrderCard {

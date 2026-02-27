@@ -42,6 +42,8 @@ export async function POST(request: NextRequest) {
     const preInspectionPrice = preInspection ? 500 : 0;
     const totalAmount = (planPrice + preInspectionPrice) * cardCount;
 
+    const customerName = (session.user as { name?: string | null }).name ?? null;
+
     const order = await prisma.order.create({
       data: {
         userId,
@@ -49,7 +51,15 @@ export async function POST(request: NextRequest) {
         gradingCompany,
         cardCount,
         preInspection,
+        status: "受付",
         totalAmount,
+        userDisplayName: customerName,
+        customerName,
+        preInspectionRequested: preInspection,
+        totalCardCount: cardCount,
+        gradingTotalAmount: totalAmount,
+        preInspectionFee: preInspection ? 500 * cardCount : 0,
+        totalInvoiceAmount: totalAmount,
         cards: {
           create: (cards as { cardName: string }[]).map((c) => ({ cardName: c.cardName })),
         },

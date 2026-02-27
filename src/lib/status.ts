@@ -1,27 +1,28 @@
-export const STATUS_LABELS: Record<string, string> = {
-  pending: "受付待ち",
-  received: "受付済み",
-  pre_inspecting: "事前鑑定中",
-  pre_done: "事前鑑定完了（お客様確認待ち）",
-  shipping: "鑑定機関へ発送済み",
-  grading: "鑑定中",
-  returning: "返送中",
-  completed: "完了",
-};
+export const STATUS_LIST = [
+  "受付",
+  "事前鑑定中",
+  "FEDX輸送中",
+  "PSA鑑定中",
+  "PSA返送中",
+  "国内返送中",
+  "完了",
+] as const;
 
-export const STATUS_LIST = Object.keys(STATUS_LABELS);
+export const STATUS_LABELS: Record<string, string> = STATUS_LIST.reduce((acc, status) => {
+  acc[status] = status;
+  return acc;
+}, {} as Record<string, string>);
 
 export function getStatusLabel(status: string): string {
   return STATUS_LABELS[status] ?? status;
 }
 
 export const STATUS_COLORS: Record<string, string> = {
-  pending: "#f59e0b",
-  received: "#3b82f6",
-  pre_inspecting: "#8b5cf6",
-  pre_done: "#ec4899",
-  shipping: "#06b6d4",
-  grading: "#6366f1",
-  returning: "#f97316",
-  completed: "#10b981",
+  受付: "#f59e0b",
+  事前鑑定中: "#8b5cf6",
+  FEDX輸送中: "#06b6d4",
+  PSA鑑定中: "#6366f1",
+  PSA返送中: "#f97316",
+  国内返送中: "#3b82f6",
+  完了: "#10b981",
 };

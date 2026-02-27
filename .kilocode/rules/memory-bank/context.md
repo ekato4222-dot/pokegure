@@ -24,6 +24,9 @@ The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. I
   - Contact/CTA section with LINE and email
   - Responsive navigation with mobile menu
   - Noto Sans JP font via next/font/google
+- [x] サービス名を「グレサ」から「ポケグレ」に変更
+  - `src/app/page.tsx`: ナビロゴ・フッターのサービス名を更新
+  - `src/app/layout.tsx`: タイトル・OGP・キーワードを更新
 - [x] Revamped to Pokemon card ONLY specialization
   - Removed "Supported Card Genres" section (was showing Sports/MTG/Yu-Gi-Oh)
   - Added "Pokemon Card Types" section (旧裏・初期, SR/SAR/UR, プロモ, スタンダード, 旧裏リバイバル, 海外版)

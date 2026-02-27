@@ -9,7 +9,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "グレサ | ポケカ鑑定代行 PSA・BGS・CGC | GradingServices",
+  title: "ポケグレ | ポケカ鑑定代行 PSA・BGS・CGC | GradingServices",
   description:
     "ポケモンカード専門の鑑定代行サービス。PSA公式認定代理店として、PSA・BGS・CGCへのFedExアメリカ直送で安全・確実に鑑定代行を行います。ポケカの価値を世界基準で証明しましょう。",
   keywords: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "BGS",
     "CGC",
     "グレーディング",
-    "グレサ",
+    "ポケグレ",
     "旧裏カード",
     "初期ポケカ",
     "PSA10",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "FedEx直送",
   ],
   openGraph: {
-    title: "グレサ | ポケカ鑑定代行 PSA・BGS・CGC",
+    title: "ポケグレ | ポケカ鑑定代行 PSA・BGS・CGC",
     description:
       "ポケモンカード専門の鑑定代行サービス。PSA公式認定代理店として、FedExアメリカ直送で安全・確実に鑑定代行を行います。",
     type: "website",

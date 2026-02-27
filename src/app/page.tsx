@@ -327,7 +327,7 @@ export default function Home() {
                 G
               </div>
               <div>
-                <div className="font-black text-lg leading-none gradient-text">グレサ</div>
+                <div className="font-black text-lg leading-none gradient-text">ポケグレ</div>
                 <div className="text-xs text-gray-400 leading-none">ポケカ鑑定代行</div>
               </div>
             </div>
@@ -1023,7 +1023,7 @@ export default function Home() {
                   G
                 </div>
                 <div>
-                  <div className="font-black text-lg leading-none gradient-text">グレサ</div>
+                  <div className="font-black text-lg leading-none gradient-text">ポケグレ</div>
                   <div className="text-xs text-gray-400 leading-none">ポケカ鑑定代行</div>
                 </div>
               </div>
@@ -1065,7 +1065,7 @@ export default function Home() {
             style={{ borderColor: "rgba(212, 175, 55, 0.1)" }}
           >
             <p className="text-gray-500 text-xs">
-              © 2024 グレーディング・サービス（グレサ）. All rights reserved.
+              © 2024 ポケグレ. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <a

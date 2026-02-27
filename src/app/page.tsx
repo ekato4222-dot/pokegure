@@ -115,11 +115,11 @@ export default function Home() {
   const faqs = [
     {
       q: "鑑定にはどのくらいの期間がかかりますか？",
-      a: "プランによって異なりますが、通常プランで約2〜4ヶ月、エクスプレスプランで約1〜2ヶ月が目安です。PSA・BGS・CGCの混雑状況により変動する場合があります。",
+      a: "プランによって異なりますが、エコノミープランで約3〜4ヶ月、スタンダードプランで約2〜3ヶ月、エクスプレスプランで約1〜2ヶ月が目安です。PSA・BGS・CGCの混雑状況により変動する場合があります。",
     },
     {
-      q: "どんなカードでも鑑定できますか？",
-      a: "ポケモンカードをはじめ、スポーツカード、MTG、遊戯王など様々なトレーディングカードに対応しています。一部受付停止カードがある場合はお知らせページをご確認ください。",
+      q: "ポケモンカードはどんな種類でも鑑定できますか？",
+      a: "旧裏・旧裏面・初期カード・プロモカード・SR・SAR・URなど、ほぼすべてのポケモンカードに対応しています。一部受付停止カードがある場合はお知らせページをご確認ください。",
     },
     {
       q: "カードが破損した場合の保証はありますか？",
@@ -127,7 +127,7 @@ export default function Home() {
     },
     {
       q: "PSA・BGS・CGCの違いは何ですか？",
-      a: "PSAは世界最大の鑑定機関で流通量が多く、BGSはサブグレードが付く詳細な評価が特徴、CGCはコミック・カード両方に対応した新興機関です。用途に合わせてお選びください。",
+      a: "PSAは世界最大の鑑定機関で流通量が多く、ポケカ市場での認知度が最高です。BGSはセンタリング・表面・角・縁の4項目を個別評価するサブグレード制度が特徴。CGCはコスパが良く急成長中の機関です。",
     },
     {
       q: "申し込みから発送までの流れを教えてください。",
@@ -137,6 +137,14 @@ export default function Home() {
       q: "グレードが低かった場合はどうなりますか？",
       a: "鑑定結果に関わらず、鑑定料金は発生いたします。グレードが低い場合でも、ケースに入った状態でお返しします。事前にカードのコンディションをご確認いただくことをお勧めします。",
     },
+    {
+      q: "旧裏・初期カードの鑑定は可能ですか？",
+      a: "はい、旧裏面カード・初期カード（第1弾〜）も対応しています。ポケカ専門スタッフが丁寧に検品・梱包いたします。希少カードの取り扱いも豊富な実績があります。",
+    },
+    {
+      q: "何枚から申し込めますか？",
+      a: "1枚から申し込み可能です。まとめて出すほど1枚あたりの送料コストが下がるため、複数枚でのご依頼をおすすめしています。",
+    },
   ];
 
   const services = [
@@ -145,8 +153,8 @@ export default function Home() {
       subtitle: "Professional Sports Authenticator",
       color: "psa-grade",
       accentColor: "#4a90d9",
-      description: "世界最大・最も信頼性の高い鑑定機関。PSAグレードは世界中のコレクターに認知されており、高い流動性と資産価値を誇ります。",
-      features: ["世界最高の認知度", "10段階グレーディング", "PSA公式サイトで真贋確認", "高い市場流動性"],
+      description: "世界最大・最も信頼性の高い鑑定機関。PSAグレードはポケカ市場で最も認知されており、高い流動性と資産価値を誇ります。",
+      features: ["ポケカ市場で最高の認知度", "10段階グレーディング", "PSA公式サイトで真贋確認", "高い市場流動性"],
       badge: "PSA",
     },
     {
@@ -163,8 +171,8 @@ export default function Home() {
       subtitle: "Certified Guaranty Company",
       color: "cgc-grade",
       accentColor: "#4caf50",
-      description: "コミックとカード両方に対応した成長著しい鑑定機関。競争力のある価格と高品質なサービスで注目を集めています。",
-      features: ["コスパ優秀", "コミック・カード両対応", "急成長の認知度", "高品質ケース"],
+      description: "競争力のある価格と高品質なサービスで急成長中の鑑定機関。ポケカコレクターにも注目されています。",
+      features: ["コスパ優秀", "急成長の認知度", "高品質ケース", "ポケカ対応実績多数"],
       badge: "CGC",
     },
   ];
@@ -179,13 +187,13 @@ export default function Home() {
     {
       num: "02",
       title: "カードを梱包・発送",
-      desc: "専用の梱包方法に従ってカードを保護し、弊社の受付住所へ郵送してください。",
+      desc: "専用の梱包方法に従ってポケカを保護し、弊社の受付住所へ郵送してください。",
       icon: "📦",
     },
     {
       num: "03",
       title: "受付・検品",
-      desc: "カード到着後、内容を確認し受付完了のご連絡をいたします。",
+      desc: "カード到着後、ポケカ専門スタッフが内容を確認し受付完了のご連絡をいたします。",
       icon: "🔍",
     },
     {
@@ -197,7 +205,7 @@ export default function Home() {
     {
       num: "05",
       title: "鑑定・グレーディング",
-      desc: "PSA・BGS・CGCの専門家がカードを詳細に検査し、グレードを決定します。",
+      desc: "PSA・BGS・CGCの専門家がポケカを詳細に検査し、グレードを決定します。",
       icon: "🏆",
     },
     {
@@ -242,10 +250,19 @@ export default function Home() {
   ];
 
   const stats = [
-    { value: "10,000+", label: "鑑定実績枚数" },
+    { value: "10,000+", label: "ポケカ鑑定実績" },
     { value: "98%", label: "顧客満足度" },
     { value: "5年+", label: "サービス実績" },
     { value: "3社", label: "対応鑑定機関" },
+  ];
+
+  const pokemonTypes = [
+    { name: "旧裏・初期カード", color: "#ffd700", desc: "第1弾〜旧裏面カード" },
+    { name: "SR・SAR・UR", color: "#e94560", desc: "スペシャルレアリティ" },
+    { name: "プロモカード", color: "#4a90d9", desc: "非売品・限定プロモ" },
+    { name: "スタンダード", color: "#4caf50", desc: "現行レギュレーション" },
+    { name: "旧裏リバイバル", color: "#9c27b0", desc: "復刻・リメイクカード" },
+    { name: "海外版ポケカ", color: "#ff9800", desc: "英語版・海外限定版" },
   ];
 
   return (
@@ -311,13 +328,13 @@ export default function Home() {
               </div>
               <div>
                 <div className="font-black text-lg leading-none gradient-text">グレサ</div>
-                <div className="text-xs text-gray-400 leading-none">GradingServices</div>
+                <div className="text-xs text-gray-400 leading-none">ポケカ鑑定代行</div>
               </div>
             </div>
 
             {/* Desktop nav */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#services" className="nav-link text-sm">サービス</a>
+              <a href="#services" className="nav-link text-sm">鑑定機関</a>
               <a href="#how-it-works" className="nav-link text-sm">申込方法</a>
               <a href="#pricing" className="nav-link text-sm">料金プラン</a>
               <a href="#faq" className="nav-link text-sm">よくある質問</a>
@@ -344,7 +361,7 @@ export default function Home() {
               style={{ borderColor: "rgba(212, 175, 55, 0.2)" }}
             >
               <div className="flex flex-col gap-4">
-                <a href="#services" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>サービス</a>
+                <a href="#services" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>鑑定機関</a>
                 <a href="#how-it-works" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>申込方法</a>
                 <a href="#pricing" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>料金プラン</a>
                 <a href="#faq" className="nav-link text-sm" onClick={() => setMobileMenuOpen(false)}>よくある質問</a>
@@ -395,9 +412,9 @@ export default function Home() {
               color: "var(--gold)",
             }}
           >
-            <span>⭐</span>
-            <span>PSA公式認定代理店 ／ BGS・CGC対応</span>
-            <span>⭐</span>
+            <span>🎴</span>
+            <span>ポケモンカード専門 ／ PSA・BGS・CGC対応</span>
+            <span>🎴</span>
           </div>
 
           {/* Main heading */}
@@ -409,11 +426,28 @@ export default function Home() {
             <span className="text-white">で証明する</span>
           </h1>
 
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            PSA・BGS・CGCの鑑定代行サービス。<br />
-            FedExアメリカ直送で、あなたの大切なカードを<br className="hidden md:block" />
-            安全・確実に世界最高峰の鑑定機関へ。
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
+            ポケモンカード専門の鑑定代行サービス。<br />
+            PSA・BGS・CGCへFedExアメリカ直送で、<br className="hidden md:block" />
+            あなたの大切なポケカを安全・確実に鑑定。
           </p>
+
+          {/* Pokemon card types highlight */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {["旧裏・初期カード", "SR・SAR・UR", "プロモカード", "海外版ポケカ"].map((type) => (
+              <span
+                key={type}
+                className="text-xs px-3 py-1 rounded-full"
+                style={{
+                  background: "rgba(212, 175, 55, 0.1)",
+                  border: "1px solid rgba(212, 175, 55, 0.3)",
+                  color: "rgba(212, 175, 55, 0.9)",
+                }}
+              >
+                {type}
+              </span>
+            ))}
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
             <a href="#contact" className="btn-primary text-base px-8 py-4">
@@ -448,6 +482,62 @@ export default function Home() {
               className="w-1 h-3 rounded-full"
               style={{ background: "var(--gold)", animation: "float 1.5s ease-in-out infinite" }}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Pokemon Card Types Section */}
+      <section className="relative z-10 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div
+              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
+              style={{
+                background: "rgba(212, 175, 55, 0.1)",
+                border: "1px solid rgba(212, 175, 55, 0.3)",
+                color: "var(--gold)",
+              }}
+            >
+              POKEMON CARDS
+            </div>
+            <h2 className="section-title text-white">
+              あらゆる<span className="gradient-text">ポケカ</span>に対応
+            </h2>
+            <p className="section-subtitle">
+              初期カードから最新弾まで、ポケモンカード専門スタッフが丁寧に対応します
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {pokemonTypes.map((type, i) => (
+              <div
+                key={i}
+                className="glass-card rounded-2xl p-5 flex items-center gap-4 group hover:-translate-y-1 transition-transform duration-300"
+                style={{ borderColor: `${type.color}30` }}
+              >
+                <div
+                  className="w-3 h-12 rounded-full flex-shrink-0"
+                  style={{ background: `linear-gradient(180deg, ${type.color}, ${type.color}60)` }}
+                />
+                <div>
+                  <div className="font-black text-white text-sm md:text-base">{type.name}</div>
+                  <div className="text-gray-400 text-xs mt-0.5">{type.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className="mt-8 rounded-2xl p-5 text-center"
+            style={{
+              background: "rgba(212, 175, 55, 0.05)",
+              border: "1px solid rgba(212, 175, 55, 0.2)",
+            }}
+          >
+            <p className="text-gray-300 text-sm">
+              <span className="gradient-text font-bold">ポケモンカード専門</span>だからこそ、カードの価値・状態を正確に把握。
+              希少カードの取り扱い実績も豊富です。
+            </p>
           </div>
         </div>
       </section>
@@ -545,20 +635,20 @@ export default function Home() {
                 WHY GRADING?
               </div>
               <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                なぜ<span className="gradient-text">グレーディング</span>が<br />必要なのか？
+                なぜポケカに<br /><span className="gradient-text">グレーディング</span>が<br />必要なのか？
               </h2>
               <p className="text-gray-300 leading-relaxed mb-8">
-                トレーディングカードの価値は、そのコンディションによって大きく左右されます。
+                ポケモンカードの価値は、そのコンディションによって大きく左右されます。
                 グレーディングを行うことで、カードの真贋と状態が第三者機関によって証明され、
                 売買時の信頼性が格段に向上します。
               </p>
 
               <div className="space-y-4">
                 {[
-                  { icon: "💎", title: "資産価値の最大化", desc: "グレード10のカードは未鑑定品の数倍〜数十倍の価値になることも" },
+                  { icon: "💎", title: "資産価値の最大化", desc: "PSA10のポケカは未鑑定品の数倍〜数十倍の価値になることも" },
                   { icon: "🛡️", title: "真贋の証明", desc: "世界的に認められた機関による偽造品チェックで安心の取引を" },
-                  { icon: "📈", title: "市場流動性の向上", desc: "PSA・BGSグレードは世界中のオークションで高い信頼性を持つ" },
-                  { icon: "🔒", title: "長期保存・保護", desc: "特殊ケースに封入されることで、カードを永続的に保護" },
+                  { icon: "📈", title: "市場流動性の向上", desc: "PSA・BGSグレードはメルカリ・ヤフオク・海外オークションで高い信頼性" },
+                  { icon: "🔒", title: "長期保存・保護", desc: "特殊ケースに封入されることで、大切なポケカを永続的に保護" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 glass-card rounded-2xl p-4">
                     <span className="text-2xl">{item.icon}</span>
@@ -601,7 +691,7 @@ export default function Home() {
                 style={{ borderColor: "rgba(212, 175, 55, 0.3)" }}
               >
                 <p className="text-sm text-gray-300">
-                  <span className="gradient-text font-bold">PSA・BGS・CGC</span> は10段階でカードを評価。<br />
+                  <span className="gradient-text font-bold">PSA・BGS・CGC</span> は10段階でポケカを評価。<br />
                   グレードが高いほど、市場価値が大幅に上昇します。
                 </p>
               </div>
@@ -760,60 +850,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Supported Cards Section */}
-      <section className="relative z-10 py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4"
-              style={{
-                background: "rgba(212, 175, 55, 0.1)",
-                border: "1px solid rgba(212, 175, 55, 0.3)",
-                color: "var(--gold)",
-              }}
-            >
-              SUPPORTED CARDS
-            </div>
-            <h2 className="section-title text-white">
-              対応<span className="gradient-text">カードジャンル</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: "ポケモンカード", emoji: "🎴", desc: "ポケカ専門の知識で対応", highlight: true },
-              { name: "スポーツカード", emoji: "⚾", desc: "MLB・NBA・NFLなど" },
-              { name: "MTG", emoji: "🧙", desc: "マジック：ザ・ギャザリング" },
-              { name: "遊戯王", emoji: "⚡", desc: "レアカードも対応" },
-            ].map((card, i) => (
-              <div
-                key={i}
-                className="glass-card rounded-3xl p-6 text-center"
-                style={{
-                  borderColor: card.highlight ? "rgba(212, 175, 55, 0.5)" : "rgba(212, 175, 55, 0.2)",
-                  background: card.highlight ? "rgba(212, 175, 55, 0.05)" : "rgba(255, 255, 255, 0.03)",
-                }}
-              >
-                <div className="text-5xl mb-4">{card.emoji}</div>
-                <div className="font-black text-white mb-2">{card.name}</div>
-                <div className="text-gray-400 text-xs">{card.desc}</div>
-                {card.highlight && (
-                  <div
-                    className="mt-3 text-xs font-bold px-3 py-1 rounded-full inline-block"
-                    style={{
-                      background: "rgba(212, 175, 55, 0.2)",
-                      color: "var(--gold)",
-                    }}
-                  >
-                    ⭐ 専門対応
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section
         id="faq"
@@ -920,9 +956,9 @@ export default function Home() {
             />
 
             <div className="relative z-10">
-              <div className="text-5xl mb-6">🏆</div>
+              <div className="text-5xl mb-6">🎴</div>
               <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
-                今すぐ<span className="gradient-text">鑑定</span>を始めよう
+                今すぐ<span className="gradient-text">ポケカ鑑定</span>を始めよう
               </h2>
               <p className="text-gray-300 text-lg mb-8 max-w-xl mx-auto">
                 あなたの大切なポケモンカードの価値を、世界基準で証明しましょう。
@@ -988,11 +1024,11 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="font-black text-lg leading-none gradient-text">グレサ</div>
-                  <div className="text-xs text-gray-400 leading-none">GradingServices</div>
+                  <div className="text-xs text-gray-400 leading-none">ポケカ鑑定代行</div>
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
-                PSA公式認定代理店として、ポケモンカードをはじめとするトレーディングカードの鑑定代行サービスを提供しています。
+                ポケモンカード専門の鑑定代行サービス。PSA・BGS・CGCへのFedEx直送で、あなたの大切なポケカを世界基準で鑑定します。
               </p>
             </div>
 

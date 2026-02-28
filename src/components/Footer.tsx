@@ -33,7 +33,6 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link href="/services" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>PSA鑑定代行</Link></li>
               <li><Link href="/services" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>BGS鑑定代行</Link></li>
-              <li><Link href="/services" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>CGC鑑定代行</Link></li>
               <li><Link href="/pricing" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>料金プラン</Link></li>
               <li><Link href="/how-it-works" className="text-sm transition-colors hover:text-indigo-600" style={{ color: "#6b7280" }}>申込方法</Link></li>
             </ul>
@@ -58,20 +57,6 @@ export default function Footer() {
             © 2024 ポケグレ. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a
-              href="https://twitter.com/gradingservices"
-              className="text-sm transition-colors hover:text-indigo-600"
-              style={{ color: "#6b7280" }}
-            >
-              Twitter
-            </a>
-            <a
-              href="https://lin.ee/40XcCAh"
-              className="text-sm transition-colors hover:text-indigo-600"
-              style={{ color: "#6b7280" }}
-            >
-              LINE
-            </a>
           </div>
         </div>
       </div>

@@ -12,11 +12,18 @@ export default async function DashboardPage() {
   const userId = (session.user as { id?: string }).id!;
   const isAdmin = (session.user as { role?: string }).role === "admin";
 
-  const orders = await prisma.order.findMany({
-    where: isAdmin ? {} : { userId },
-    include: { additionalCharges: true },
-    orderBy: { createdAt: "desc" },
-  });
+  let orders: Array<any> = [];
+  let dbError = false;
+
+  try {
+    orders = await prisma.order.findMany({
+      where: isAdmin ? {} : { userId },
+      include: { additionalCharges: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch {
+    dbError = true;
+  }
 
   const planLabels: Record<string, string> = {
     economy: "エコノミー",
@@ -56,6 +63,12 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
+        {dbError && (
+          <div className="glass-card" style={{ marginBottom: "1rem", padding: "1rem", color: "#b45309" }}>
+            現在データベースに接続できません。接続復旧後に注文一覧が表示されます。
+          </div>
+        )}
+
         {orders.length === 0 ? (
           <div className="glass-card" style={{ textAlign: "center", padding: "3rem", color: "var(--text-muted)" }}>
             <p style={{ fontSize: "1.1rem", marginBottom: "1rem" }}>まだ申し込みがありません</p>
@@ -66,7 +79,7 @@ export default async function DashboardPage() {
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {orders.map((order) => {
-              const extras = order.additionalCharges.reduce((s, c) => s + c.amount, 0);
+              const extras = order.additionalCharges.reduce((s: number, c: { amount: number }) => s + c.amount, 0);
               const total = order.totalAmount + extras;
               return (
                 <Link key={order.id} href={`/dashboard/order/${order.id}`} style={{ textDecoration: "none" }}>

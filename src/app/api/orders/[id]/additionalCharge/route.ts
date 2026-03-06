@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { parseNullableInt } from "@/lib/orderFields";
 
 export async function POST(
   request: NextRequest,
@@ -14,10 +15,19 @@ export async function POST(
 
   const { id } = await params;
   const { description, amount } = await request.json();
+  const parsed = parseNullableInt(amount);
 
-  const charge = await prisma.additionalCharge.create({
-    data: { orderId: id, description, amount: Number(amount) },
-  });
+  if (!description || !parsed.ok || parsed.value === null) {
+    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  }
 
-  return NextResponse.json(charge, { status: 201 });
+  try {
+    const charge = await prisma.additionalCharge.create({
+      data: { orderId: id, description, amount: parsed.value },
+    });
+
+    return NextResponse.json(charge, { status: 201 });
+  } catch {
+    return NextResponse.json({ error: "Create failed" }, { status: 503 });
+  }
 }

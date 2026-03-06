@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { INITIAL_ORDER_STATUS } from "@/lib/status";
 
 const PLAN_PRICES: Record<string, number> = {
   economy: 3500,
@@ -18,13 +19,17 @@ export async function GET() {
   const userId = (session.user as { id?: string }).id;
   const isAdmin = (session.user as { role?: string }).role === "admin";
 
-  const orders = await prisma.order.findMany({
-    where: isAdmin ? {} : { userId },
-    include: { user: { select: { name: true, email: true } }, cards: true, additionalCharges: true },
-    orderBy: { createdAt: "desc" },
-  });
+  try {
+    const orders = await prisma.order.findMany({
+      where: isAdmin ? {} : { userId },
+      include: { user: { select: { name: true, email: true } }, cards: true, additionalCharges: true },
+      orderBy: { createdAt: "desc" },
+    });
 
-  return NextResponse.json(orders);
+    return NextResponse.json(orders);
+  } catch {
+    return NextResponse.json({ error: "DB unavailable", orders: [] }, { status: 503 });
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -51,7 +56,7 @@ export async function POST(request: NextRequest) {
         gradingCompany,
         cardCount,
         preInspection,
-        status: "受付",
+        status: INITIAL_ORDER_STATUS,
         totalAmount,
         userDisplayName: customerName,
         customerName,

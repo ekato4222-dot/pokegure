@@ -2,7 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { STATUS_LIST } from "@/lib/status";
+import { ADMIN_ONLY_ORDER_FIELDS, parseNullableInt } from "@/lib/orderFields";
+import { normalizeStatus } from "@/lib/status";
+
+function withoutAdminOnlyFields<T extends Record<string, unknown>>(order: T) {
+  const sanitized = { ...order };
+  for (const field of ADMIN_ONLY_ORDER_FIELDS) {
+    delete sanitized[field];
+  }
+  return sanitized;
+}
 
 export async function GET(
   _request: NextRequest,
@@ -17,24 +26,28 @@ export async function GET(
   const userId = (session.user as { id?: string }).id;
   const isAdmin = (session.user as { role?: string }).role === "admin";
 
-  const order = await prisma.order.findUnique({
-    where: { id },
-    include: {
-      user: { select: { name: true, email: true, phone: true } },
-      cards: true,
-      additionalCharges: true,
-    },
-  });
+  try {
+    const order = await prisma.order.findUnique({
+      where: { id },
+      include: {
+        user: { select: { name: true, email: true, phone: true } },
+        cards: true,
+        additionalCharges: true,
+      },
+    });
 
-  if (!order) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (!order) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    if (!isAdmin && order.userId !== userId) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    return NextResponse.json(isAdmin ? order : withoutAdminOnlyFields(order));
+  } catch {
+    return NextResponse.json({ error: "DB unavailable" }, { status: 503 });
   }
-
-  if (!isAdmin && order.userId !== userId) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
-  return NextResponse.json(order);
 }
 
 export async function PATCH(
@@ -49,8 +62,11 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
 
-  if (body.status && !STATUS_LIST.includes(body.status)) {
-    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+  if (body.status !== undefined) {
+    const normalizedStatus = normalizeStatus(body.status);
+    if (!normalizedStatus) {
+      return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+    }
   }
 
   const numberFields = [
@@ -78,19 +94,30 @@ export async function PATCH(
       typeof body.preInspectionRequested === "boolean" ? body.preInspectionRequested : null,
     actualShippingPlan: body.actualShippingPlan ?? null,
     cardName: body.cardName ?? null,
-    status: body.status,
     adminNote: body.adminNote ?? null,
   };
 
-  for (const field of numberFields) {
-    const value = body[field];
-    data[field] = value === "" || value === undefined || value === null ? null : Number(value);
+  if (body.status !== undefined) {
+    data.status = normalizeStatus(body.status)!;
   }
 
-  const order = await prisma.order.update({
-    where: { id },
-    data,
-  });
+  for (const field of numberFields) {
+    if (!(field in body)) continue;
+    const parsed = parseNullableInt(body[field]);
+    if (!parsed.ok) {
+      return NextResponse.json({ error: `Invalid number: ${field}` }, { status: 400 });
+    }
+    data[field] = parsed.value;
+  }
 
-  return NextResponse.json(order);
+  try {
+    const order = await prisma.order.update({
+      where: { id },
+      data,
+    });
+
+    return NextResponse.json(order);
+  } catch {
+    return NextResponse.json({ error: "Update failed" }, { status: 503 });
+  }
 }

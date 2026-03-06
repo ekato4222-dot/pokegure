@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { STATUS_LIST } from "@/lib/status";
+import { normalizeStatus } from "@/lib/status";
 
 export async function PATCH(
   request: NextRequest,
@@ -15,15 +15,20 @@ export async function PATCH(
 
   const { id } = await params;
   const { status, adminNote } = await request.json();
+  const normalizedStatus = normalizeStatus(status);
 
-  if (!STATUS_LIST.includes(status)) {
+  if (!normalizedStatus) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
 
-  const order = await prisma.order.update({
-    where: { id },
-    data: { status, ...(adminNote !== undefined && { adminNote }) },
-  });
+  try {
+    const order = await prisma.order.update({
+      where: { id },
+      data: { status: normalizedStatus, ...(adminNote !== undefined && { adminNote }) },
+    });
 
-  return NextResponse.json(order);
+    return NextResponse.json(order);
+  } catch {
+    return NextResponse.json({ error: "Update failed" }, { status: 503 });
+  }
 }

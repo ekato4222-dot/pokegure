@@ -43,6 +43,21 @@ export async function POST(request: NextRequest) {
     const { plan, gradingCompany, cardCount, preInspection, cards } = body;
     const userId = (session.user as { id?: string }).id!;
 
+    // デモユーザーはDBなしでモック成功レスポンスを返す
+    if (userId === "demo-user" || userId === "demo-admin") {
+      const planPrice = PLAN_PRICES[plan] ?? 0;
+      const preInspectionPrice = preInspection ? 500 : 0;
+      const totalAmount = (planPrice + preInspectionPrice) * cardCount;
+      return NextResponse.json({
+        id: "demo-order-" + Date.now(),
+        plan, gradingCompany, cardCount, preInspection,
+        status: INITIAL_ORDER_STATUS,
+        totalAmount,
+        cards: (cards as { cardName: string }[]).map((c, i) => ({ id: `demo-card-${i}`, cardName: c.cardName })),
+        demo: true,
+      }, { status: 201 });
+    }
+
     const planPrice = PLAN_PRICES[plan] ?? 0;
     const preInspectionPrice = preInspection ? 500 : 0;
     const totalAmount = (planPrice + preInspectionPrice) * cardCount;

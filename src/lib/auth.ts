@@ -38,6 +38,23 @@ export const authOptions: NextAuthOptions = {
           };
         }
 
+        // Vercelテスト環境向け: デモ顧客アカウント
+        const demoUserEmail = process.env.DEMO_USER_EMAIL?.trim().toLowerCase();
+        const demoUserPassword = process.env.DEMO_USER_PASSWORD;
+        if (
+          demoUserEmail &&
+          demoUserPassword &&
+          credentials.email.toLowerCase() === demoUserEmail &&
+          credentials.password === demoUserPassword
+        ) {
+          return {
+            id: "demo-user",
+            email: credentials.email,
+            name: "テストユーザー",
+            role: "customer",
+          };
+        }
+
         try {
           const user = await prisma.user.findUnique({
             where: { email: credentials.email },

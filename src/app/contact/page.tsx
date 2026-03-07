@@ -81,7 +81,7 @@ export default function ContactPage() {
               <div className="text-sm" style={{ color: "#047857" }}>LINEなら素早く返信できます。カードの写真も送れて便利です。</div>
             </div>
             <a
-              href="https://lin.ee/40XcCAh"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary text-sm px-6 py-3 flex-shrink-0"
@@ -196,7 +196,7 @@ export default function ContactPage() {
                 お急ぎの場合はLINEでご連絡ください。
               </p>
               <a
-                href="https://lin.ee/40XcCAh"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary text-base px-8 py-4 inline-flex items-center gap-2"
@@ -210,8 +210,8 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { icon: "📍", label: "所在地", value: "〒171-0022 東京都豊島区南池袋3-13-8" },
-              { icon: "🐦", label: "Twitter", value: "@gradingservices" },
+              { icon: "📍", label: "所在地", value: "（所在地準備中）" },
+              { icon: "🐦", label: "Twitter", value: "@pokegure_jp" },
               { icon: "📅", label: "次回締め切り", value: "3月4日(水)" },
             ].map((info, i) => (
               <div key={i} className="glass-card rounded-2xl p-4 text-center">

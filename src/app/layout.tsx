@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    creator: "@gradingservices",
-    site: "@gradingservices",
+    creator: "@pokegure_jp",
+    site: "@pokegure_jp",
   },
 };
 

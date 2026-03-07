@@ -48,9 +48,9 @@ const termsSections = [
 const tokushoho = [
   { label: "販売事業者名", value: "ポケグレ" },
   { label: "代表者", value: "代表者氏名（詳細はお問い合わせください）" },
-  { label: "所在地", value: "〒171-0022 東京都豊島区南池袋3-13-8" },
+  { label: "所在地", value: "（所在地準備中）" },
   { label: "電話番号", value: "お問い合わせはLINEまたはメールにて受け付けています" },
-  { label: "メールアドレス", value: "info@gradingservices.jp" },
+  { label: "メールアドレス", value: "info@pokegure.jp" },
   { label: "サービスの内容", value: "ポケモンカード鑑定代行サービス（PSA・BGSへの申請代行）" },
   { label: "販売価格", value: "各プランページに記載の価格（消費税別）" },
   { label: "支払方法", value: "銀行振込・PayPay・クレジットカード" },

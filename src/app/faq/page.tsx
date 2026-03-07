@@ -172,7 +172,7 @@ export default function FaqPage() {
               お問い合わせ
             </Link>
             <a
-              href="https://lin.ee/40XcCAh"
+              href="#"
               className="btn-secondary text-base px-8 py-4"
               target="_blank"
               rel="noopener noreferrer"

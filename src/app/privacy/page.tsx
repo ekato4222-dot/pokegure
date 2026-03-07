@@ -60,9 +60,9 @@ const sections = [
     title: "9. お問い合わせ",
     content: `個人情報の取り扱いに関するお問い合わせは、以下までご連絡ください。
 事業者名：ポケグレ
-所在地：〒171-0022 東京都豊島区南池袋3-13-8
-メール：info@gradingservices.jp
-LINE：https://lin.ee/40XcCAh`,
+所在地：（所在地準備中）
+メール：info@pokegure.jp
+LINE：#`,
   },
 ];
 
